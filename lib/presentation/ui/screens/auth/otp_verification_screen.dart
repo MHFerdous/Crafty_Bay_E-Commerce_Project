@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import '../../utility/image_assets.dart';
-import 'otp_verification_screen.dart';
 
-class EmailVerificationScreen extends StatefulWidget {
-  const EmailVerificationScreen({Key? key}) : super(key: key);
+class OtpVerificationScreen extends StatefulWidget {
+  const OtpVerificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmailVerificationScreen> createState() =>
-      _EmailVerificationScreenState();
+  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
 }
 
-class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +31,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 height: 16,
               ),
               Text(
-                'Welcome Back',
+                'Enter OTP Code',
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
@@ -44,7 +41,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 height: 8,
               ),
               Text(
-                'Please Enter Your Email Address',
+                'A 4 Digit OTP Code has been Sent',
                 style: Theme.of(context)
                     .textTheme
                     .titleSmall
@@ -64,11 +61,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(
-                      const OtpVerificationScreen(),
-                    );
-                  },
+                  onPressed: () {},
                   child: const Text('Next'),
                 ),
               ),
