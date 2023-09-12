@@ -13,66 +13,97 @@ class EmailVerificationScreen extends StatefulWidget {
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final bool _emailVerificationInProgress = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 100,
-              ),
-              Center(
-                child: SvgPicture.asset(
-                  ImageAssets.craftyBayLogoSVG,
-                  width: 100,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 100,
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                'Welcome Back',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontSize: 32),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'Please Enter Your Email Address',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: Colors.grey),
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: 'Email Address',
+                Center(
+                  child: SvgPicture.asset(
+                    ImageAssets.craftyBayLogoSVG,
+                    width: 100,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(
-                      const OtpVerificationScreen(),
-                    );
+                const SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Welcome Back',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 32),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                Text(
+                  'Please Enter Your Email Address',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall
+                      ?.copyWith(color: Colors.grey),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextFormField(
+                  controller: _emailTEController,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    hintText: 'Email Address',
+                  ),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Please enter your email';
+                    }
+                    if (!RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value!)) {
+                      return 'Enter a valid email';
+                    }
+                    return null;
                   },
-                  child: const Text('Next'),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: Visibility(
+                    visible: _emailVerificationInProgress == false,
+                    replacement: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (!_formKey.currentState!.validate()) {
+                          return;
+                        }
+                        Get.to(
+                          const OtpVerificationScreen(),
+                        );
+                      },
+                      child: const Text('Next'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

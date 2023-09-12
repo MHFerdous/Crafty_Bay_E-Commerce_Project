@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 5)).then(
       (value) {
         Get.offAll(
-          const HomeScreen(),
+          const EmailVerificationScreen(),
         );
       },
     );
