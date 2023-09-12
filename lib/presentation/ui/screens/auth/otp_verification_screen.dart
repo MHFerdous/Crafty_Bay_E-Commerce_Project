@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,6 +16,32 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  int start = 120;
+
+  void startTimer() {
+    const onSec = Duration(seconds: 1);
+    Timer timer = Timer.periodic(
+      onSec,
+      (timer) {
+        if (start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +133,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     children: [
                       const TextSpan(text: 'This code will expire in '),
                       TextSpan(
-                        text: '120s',
+                        text: '$start s',
                         style: TextStyle(
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold),
