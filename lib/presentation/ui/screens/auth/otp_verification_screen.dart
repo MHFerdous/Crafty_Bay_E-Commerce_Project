@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,11 +17,42 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
+  /*late Timer _timer;
+  int _start = 120;
+
+  void startTimer() {
+    const onSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      onSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+    if (mounted) {
+      startTimer();
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }*/
+
+  late Timer timer;
   int start = 120;
 
   void startTimer() {
     const onSec = Duration(seconds: 1);
-    Timer timer = Timer.periodic(
+    timer = Timer.periodic(
       onSec,
       (timer) {
         if (start == 0) {
