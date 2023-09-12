@@ -17,6 +17,7 @@ class _HomeSliderState extends State<HomeSlider> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
+            viewportFraction: 1,
             height: 180.0,
             autoPlay: true,
             autoPlayAnimationDuration: const Duration(seconds: 3),
@@ -31,7 +32,10 @@ class _HomeSliderState extends State<HomeSlider> {
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(color: AppColors.primaryColor),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     alignment: Alignment.center,
                     child: Text(
                       'Slider $i',
