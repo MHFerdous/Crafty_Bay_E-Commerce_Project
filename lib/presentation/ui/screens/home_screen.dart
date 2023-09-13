@@ -5,6 +5,7 @@ import '../widgets/category_card.dart';
 import '../widgets/circular_icon_button.dart';
 import '../widgets/home/home_slider.dart';
 import '../widgets/home/section_header.dart';
+import '../widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -74,18 +75,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 12,
               ),
               const HomeSlider(),
               const SizedBox(
-                height: 16,
+                height: 8,
               ),
               SectionHeader(
                 title: 'Categories',
                 onTap: () {},
               ),
               const SizedBox(
-                height: 8,
+                height: 16,
               ),
               SizedBox(
                 height: 90,
@@ -104,8 +105,58 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Popular',
                 onTap: () {},
               ),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ProductCard(),
+                    );
+                  },
+                ),
+              ),
               const SizedBox(
-                height: 8,
+                height: 16,
+              ),
+              SectionHeader(
+                title: 'Special',
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ProductCard(),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SectionHeader(
+                title: 'New',
+                onTap: () {},
+              ),
+              SizedBox(
+                height: 180,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 20,
+                  itemBuilder: (context, index) {
+                    return const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ProductCard(),
+                    );
+                  },
+                ),
               ),
             ],
           ),
