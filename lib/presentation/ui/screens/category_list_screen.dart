@@ -1,5 +1,8 @@
+import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/widgets/category_card.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 
 class CategoryListScreen extends StatefulWidget {
   const CategoryListScreen({Key? key}) : super(key: key);
@@ -13,15 +16,20 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Categories',
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: const BackButton(
-          color: Colors.black,
-        ),
-      ),
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Categories',
+            style: TextStyle(color: Colors.black),
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Get.find<MainBottomNavController>().backToHome();
+            },
+            icon: const Icon(
+              Icons.arrow_back_outlined,
+              color: Colors.black,
+            ),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: GridView.builder(

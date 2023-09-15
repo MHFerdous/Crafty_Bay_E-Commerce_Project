@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -109,7 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Popular',
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    const ProductListScreen(),
+                  );
+                },
               ),
               SizedBox(
                 height: 180,
@@ -129,7 +134,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'Special',
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    const ProductListScreen(),
+                  );
+                },
               ),
               SizedBox(
                 height: 180,
@@ -149,7 +158,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SectionHeader(
                 title: 'New',
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    const ProductListScreen(),
+                  );
+                },
               ),
               SizedBox(
                 height: 180,
