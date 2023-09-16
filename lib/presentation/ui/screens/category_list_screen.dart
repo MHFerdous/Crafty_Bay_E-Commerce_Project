@@ -14,35 +14,41 @@ class CategoryListScreen extends StatefulWidget {
 class _CategoryListScreenState extends State<CategoryListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: const Text(
-            'Categories',
-            style: TextStyle(color: Colors.black),
-          ),
-          leading: IconButton(
-            onPressed: () {
-              Get.find<MainBottomNavController>().backToHome();
-            },
-            icon: const Icon(
-              Icons.arrow_back_outlined,
-              color: Colors.black,
+    return WillPopScope(
+      onWillPop: () async {
+        Get.find<MainBottomNavController>().backToHome();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            title: const Text(
+              'Categories',
+              style: TextStyle(color: Colors.black),
             ),
-          )),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
+            leading: IconButton(
+              onPressed: () {
+                Get.find<MainBottomNavController>().backToHome();
+              },
+              icon: const Icon(
+                Icons.arrow_back_outlined,
+                color: Colors.black,
+              ),
+            )),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+            ),
+            itemBuilder: (context, index) {
+              return const FittedBox(
+                child: CategoryCard(),
+              );
+            },
           ),
-          itemBuilder: (context, index) {
-            return const FittedBox(
-              child: CategoryCard(),
-            );
-          },
         ),
       ),
     );
