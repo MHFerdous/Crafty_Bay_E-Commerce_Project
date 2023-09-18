@@ -48,7 +48,7 @@ class _CustomStepperState extends State<CustomStepper> {
               child: const Icon(
                 Icons.remove,
                 color: Colors.white,
-                size: 18,
+                size: 16,
               ),
             ),
             onTap: () {
@@ -79,7 +79,7 @@ class _CustomStepperState extends State<CustomStepper> {
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
-                size: 18,
+                size: 16,
               ),
             ),
             onTap: () {
