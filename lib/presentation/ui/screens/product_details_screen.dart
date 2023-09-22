@@ -20,7 +20,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   List<String> sizes = [
     'mini',
-    'pro',
+    'max',
   ];
 
   int _selectedColorIndex = 0;
@@ -39,17 +39,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Stack(
                       children: [
                         const ProductImageSlider(),
-                        AppBar(
-                          leading: const BackButton(
-                            color: Colors.black,
-                          ),
-                          title: Text(
-                            'Product Details',
-                            style: TextStyle(color: Colors.grey.shade800),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
+                        productDetailsAppBar,
                       ],
                     ),
                     Padding(
@@ -248,54 +238,72 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              decoration: BoxDecoration(
-                color: AppColors.primaryColor.withOpacity(0.15),
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(16),
-                  topLeft: Radius.circular(16),
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Price',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        '\$ 99',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 120,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Add to Cart'),
-                    ),
-                  )
-                ],
-              ),
-            )
+            addToCartBottomContainer
           ],
         ),
+      ),
+    );
+  }
+
+  AppBar get productDetailsAppBar {
+    return AppBar(
+      leading: const BackButton(
+        color: Colors.black,
+      ),
+      title: Text(
+        'Product Details',
+        style: TextStyle(color: Colors.grey.shade800),
+      ),
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+    );
+  }
+
+  Container get addToCartBottomContainer {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor.withOpacity(0.15),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(16),
+          topLeft: Radius.circular(16),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Price',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                '\$ 99',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primaryColor,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: 120,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('Add to Cart'),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -71,7 +71,8 @@ class CartProductCard extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.delete_outline),
+                        icon: const Icon(Icons.delete_outline,
+                            color: Colors.redAccent),
                       ),
                     ],
                   ),
