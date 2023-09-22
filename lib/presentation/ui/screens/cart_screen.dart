@@ -1,8 +1,8 @@
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../utility/app_colors.dart';
+import '../widgets/cart_product_card.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -35,8 +35,11 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: [],
+            child: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return const CartProductCard();
+              },
             ),
           ),
           Container(
@@ -66,7 +69,7 @@ class _CartScreenState extends State<CartScreen> {
                       height: 4,
                     ),
                     Text(
-                      '\$ 99',
+                      '\$ 495',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -90,3 +93,4 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 }
+
