@@ -3,13 +3,12 @@ import 'package:http/http.dart';
 import 'dart:convert';
 import '../models/network_response.dart';
 
-
 class NetworkCaller {
   Future<NetworkResponse> getRequest(String url) async {
     try {
       Response response = await get(
         Uri.parse(url),
-       /* headers: {
+        /* headers: {
           'token': AuthUtility.userInfo.token.toString(),
         },*/
       );
