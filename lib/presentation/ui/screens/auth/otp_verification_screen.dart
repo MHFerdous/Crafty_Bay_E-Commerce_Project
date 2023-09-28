@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
