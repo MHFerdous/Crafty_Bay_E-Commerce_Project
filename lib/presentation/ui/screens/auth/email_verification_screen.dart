@@ -115,7 +115,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     );
     if (response) {
       Get.to(
-        () => const OtpVerificationScreen(),
+        () => OtpVerificationScreen(
+          email: _emailTEController.text.trim(),
+        ),
       );
     } else {
       if (mounted) {

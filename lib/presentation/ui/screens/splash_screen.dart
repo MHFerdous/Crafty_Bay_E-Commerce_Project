@@ -3,6 +3,7 @@ import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../state_holders/auth_controller.dart';
 import '../utility/image_assets.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -19,11 +20,14 @@ class _SplashScreenState extends State<SplashScreen> {
     gotoNextScreen();
   }
 
-  void gotoNextScreen() {
-    Future.delayed(const Duration(seconds: 5)).then(
+  Future<void> gotoNextScreen() async {
+    await AuthController.getAccessToken();
+    Future.delayed(const Duration(seconds: 3)).then(
       (value) {
         Get.offAll(
-          const EmailVerificationScreen(),
+          () => AuthController.isLoggedIn
+              ? const MainBottomNavScreen()
+              : const EmailVerificationScreen(),
         );
       },
     );

@@ -1,5 +1,8 @@
+import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../utility/image_assets.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -169,7 +172,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (!_formKey.currentState!.validate()) {
-                            return;
+                            Get.to(
+                                  () => const HomeScreen(),
+                            );
                           }
                         },
                         child: const Text('Complete'),
