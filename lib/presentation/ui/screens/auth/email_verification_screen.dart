@@ -71,11 +71,14 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Please enter your email';
                     }
-                    if (!RegExp(
+                    if(value!.isEmail == false){
+                      return 'Enter a valid email';
+                    }
+                   /* if (!RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                         .hasMatch(value!)) {
                       return 'Enter a valid email';
-                    }
+                    }*/
                     return null;
                   },
                 ),
