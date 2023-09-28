@@ -2,7 +2,6 @@ import 'package:crafty_bay/data/models/network_response.dart';
 import 'package:crafty_bay/data/models/slider_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get.dart';
-
 import '../../data/utility/urls.dart';
 
 class HomeSlidersController extends GetxController {
@@ -12,7 +11,7 @@ class HomeSlidersController extends GetxController {
 
   SliderModel get sliderModel => _sliderModel;
 
-  bool get emailVerificationInProgress => _getHomeSlidersInProgress;
+  bool get getHomeSlidersInProgress => _getHomeSlidersInProgress;
 
   String get message => _message;
 

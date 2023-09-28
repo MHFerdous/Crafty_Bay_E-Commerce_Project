@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,21 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 12,
               ),
-              const HomeSlider(),
+              GetBuilder<HomeSlidersController>(
+                builder: (homeSliderController) {
+                  if (homeSliderController.getHomeSlidersInProgress) {
+                    return const SizedBox(
+                      height: 180,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  return HomeSlider(
+                    sliders: homeSliderController.sliderModel.data ?? [],
+                  );
+                },
+              ),
               const SizedBox(
                 height: 8,
               ),
