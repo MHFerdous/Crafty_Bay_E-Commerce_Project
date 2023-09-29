@@ -114,6 +114,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       _emailTEController.text.trim(),
     );
     if (response) {
+      Get.snackbar('Successful', controller.message);
       Get.to(
         () => OtpVerificationScreen(
           email: _emailTEController.text.trim(),

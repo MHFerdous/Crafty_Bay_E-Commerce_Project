@@ -1,7 +1,6 @@
 import 'package:crafty_bay/data/models/network_response.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get.dart';
-
 import '../../data/utility/urls.dart';
 
 class EmailVerificationController extends GetxController {
