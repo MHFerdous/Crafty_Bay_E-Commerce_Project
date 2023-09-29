@@ -7,4 +7,7 @@ class Urls {
       '$_baseUrl/VerifyLogin/$email/$otp';
 
   static String getHomeSliders = '$_baseUrl/ListProductSlider';
+
+  static String getCategories = '$_baseUrl/CategoryList';
+
 }

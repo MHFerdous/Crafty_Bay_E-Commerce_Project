@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
@@ -27,6 +28,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeSlidersController>().getHomeSliders();
+      Get.find<CategoryController>().getCategories();
     });
     super.initState();
   }

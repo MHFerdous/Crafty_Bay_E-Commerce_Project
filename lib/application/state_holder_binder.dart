@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/email_verification_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
@@ -18,6 +19,9 @@ class StateHolderBinder extends Bindings {
     );
     Get.put(
       HomeSlidersController(),
+    );
+    Get.put(
+      CategoryController(),
     );
   }
 }

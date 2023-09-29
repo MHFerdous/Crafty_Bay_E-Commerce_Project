@@ -44,9 +44,9 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
               mainAxisSpacing: 16,
             ),
             itemBuilder: (context, index) {
-              return const FittedBox(
+              /*return const FittedBox(
                 child: CategoryCard(),
-              );
+              );*/
             },
           ),
         ),
