@@ -1,7 +1,9 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
-import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/new_product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/popular_product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/special_product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -142,30 +144,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Popular',
                 onTap: () {
                   Get.to(
-                    const ProductListScreen(),
+                    const PopularProductListScreen(),
                   );
                 },
               ),
               SizedBox(
                 height: 180,
                 child: GetBuilder<PopularProductController>(
-                  builder: (productController) {
-                    if (productController.getPopularProductsInProgress) {
+                  builder: (popularProductController) {
+                    if (popularProductController.getPopularProductsInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
                     return ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount:
-                          productController.popularProductModel.data?.length ??
-                              0,
+                      itemCount: popularProductController
+                              .popularProductModel.data?.length ??
+                          0,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:
                               const EdgeInsets.only(top: 8, left: 4, bottom: 8),
                           child: ProductCard(
-                            product: productController
+                            product: popularProductController
                                 .popularProductModel.data![index],
                           ),
                         );
@@ -181,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'Special',
                 onTap: () {
                   Get.to(
-                    const ProductListScreen(),
+                    const SpecialProductListScreen(),
                   );
                 },
               ),
@@ -218,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: 'New',
                 onTap: () {
                   Get.to(
-                    const ProductListScreen(),
+                    const NewProductListScreen(),
                   );
                 },
               ),
