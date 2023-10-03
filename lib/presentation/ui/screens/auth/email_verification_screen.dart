@@ -121,13 +121,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         ),
       );
     } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Email verification failed'),
-          ),
-        );
-      }
+      Get.snackbar('Failed', controller.message);
     }
   }
 }

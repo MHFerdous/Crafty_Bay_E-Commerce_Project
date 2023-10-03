@@ -15,7 +15,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: const Text(
-          'Category',
+          'Popular',
           style: TextStyle(color: Colors.black),
         ),
         leading: const BackButton(
@@ -33,7 +33,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
           ),
           itemBuilder: (context, index) {
             return const FittedBox(
-              child: ProductCard(),
+              /*child: ProductCard(product: ,),*/
             );
           },
         ),

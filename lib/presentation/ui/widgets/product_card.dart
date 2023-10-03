@@ -1,13 +1,15 @@
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
-import '../utility/image_assets.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
+    required this.product,
   });
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: SizedBox(
-          width: 100,
+          width: 130,
           child: Column(
             children: [
               Container(
@@ -36,8 +38,8 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
-                  image: const DecorationImage(
-                    image: AssetImage(ImageAssets.phonePng),
+                  image:  DecorationImage(
+                    image: NetworkImage(product.image ?? ''),
                   ),
                 ),
               ),
@@ -46,7 +48,7 @@ class ProductCard extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Infinix Hot 10S',
+                      product.title ?? '',
                       maxLines: 1,
                       style: TextStyle(
                           overflow: TextOverflow.ellipsis,
@@ -61,7 +63,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$99',
+                          '\$${product.price ?? 0}',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                           ),
@@ -74,10 +76,12 @@ class ProductCard extends StatelessWidget {
                               size: 16,
                               color: Colors.amber,
                             ),
-                            Text('4.5',
-                                style: TextStyle(
-                                  color: Colors.blueGrey.shade500,
-                                )),
+                            Text(
+                              '${product.star ?? 0}',
+                              style: TextStyle(
+                                color: Colors.blueGrey.shade500,
+                              ),
+                            ),
                           ],
                         ),
                         Card(

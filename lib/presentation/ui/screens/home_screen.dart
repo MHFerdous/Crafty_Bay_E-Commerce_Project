@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +120,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }
                     return ListView.builder(
-                      itemCount: categoryController.categoryModel.data?.length ?? 0,
+                      itemCount:
+                          categoryController.categoryModel.data?.length ?? 0,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
                         return CategoryCard(
@@ -144,13 +146,28 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: ProductCard(),
+                child: GetBuilder<ProductController>(
+                  builder: (productController) {
+                    if (productController.getPopularProductsInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          productController.popularProductModel.data?.length ??
+                              0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding:
+                              const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                          child: ProductCard(
+                            product: productController
+                                .popularProductModel.data![index],
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -168,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                child: ListView.builder(
+                /*child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
                   itemBuilder: (context, index) {
@@ -177,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ProductCard(),
                     );
                   },
-                ),
+                ),*/
               ),
               const SizedBox(
                 height: 8,
@@ -192,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                child: ListView.builder(
+                /*child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: 20,
                   itemBuilder: (context, index) {
@@ -201,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ProductCard(),
                     );
                   },
-                ),
+                ),*/
               ),
             ],
           ),
