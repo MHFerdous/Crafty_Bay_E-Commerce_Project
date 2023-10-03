@@ -4,7 +4,7 @@ import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get.dart';
 import '../../data/utility/urls.dart';
 
-class ProductController extends GetxController {
+class PopularProductController extends GetxController {
   bool _getPopularProductsInProgress = false;
 
   ProductModel _popularProductModel = ProductModel();

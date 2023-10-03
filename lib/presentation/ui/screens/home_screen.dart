@@ -1,12 +1,14 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/product_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../state_holders/main_bottom_nav_controller.dart';
+import '../../state_holders/new_product_controller.dart';
+import '../../state_holders/special_product_controller.dart';
 import '../widgets/category_card.dart';
 import '../widgets/circular_icon_button.dart';
 import '../widgets/home/home_slider.dart';
@@ -146,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                child: GetBuilder<ProductController>(
+                child: GetBuilder<PopularProductController>(
                   builder: (productController) {
                     if (productController.getPopularProductsInProgress) {
                       return const Center(
@@ -185,16 +187,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                /*child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: ProductCard(),
+                child: GetBuilder<NewProductController>(
+                  builder: (newController) {
+                    if (newController.getNewProductsInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          newController.newProductModel.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding:
+                              const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                          child: ProductCard(
+                            product: newController.newProductModel.data![index],
+                          ),
+                        );
+                      },
                     );
                   },
-                ),*/
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -209,16 +224,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 180,
-                /*child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: ProductCard(),
+                child: GetBuilder<SpecialProductController>(
+                  builder: (specialController) {
+                    if (specialController.getSpecialProductsInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount:
+                          specialController.specialProductModel.data?.length ??
+                              0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding:
+                              const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                          child: ProductCard(
+                            product: specialController
+                                .specialProductModel.data![index],
+                          ),
+                        );
+                      },
                     );
                   },
-                ),*/
+                ),
               ),
             ],
           ),

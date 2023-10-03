@@ -38,7 +38,7 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
-                  image:  DecorationImage(
+                  image: DecorationImage(
                     image: NetworkImage(product.image ?? ''),
                   ),
                 ),
@@ -63,7 +63,7 @@ class ProductCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${product.price ?? 0}',
+                          '\$ ${product.price ?? 0}',
                           style: TextStyle(
                             color: AppColors.primaryColor,
                           ),
