@@ -17,7 +17,9 @@ class ProductCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       onTap: () {
         Get.to(
-          const ProductDetailsScreen(),
+          ProductDetailsScreen(
+            product: product,
+          ),
         );
       },
       child: Card(

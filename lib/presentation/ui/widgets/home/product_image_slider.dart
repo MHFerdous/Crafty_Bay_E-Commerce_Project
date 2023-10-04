@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../utility/app_colors.dart';
 
 class ProductImageSlider extends StatefulWidget {
-  const ProductImageSlider({Key? key}) : super(key: key);
+  final List<String> imageList;
+
+  const ProductImageSlider({Key? key, required this.imageList})
+      : super(key: key);
 
   @override
   State<ProductImageSlider> createState() => _ProductImageSliderState();
@@ -25,20 +28,19 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               _selectedSlider.value = page;
             },
           ),
-          items: [1, 2, 3, 4].map(
-            (i) {
+          items: widget.imageList.map(
+            (imageUrl) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       color: Colors.grey.shade300,
+                      image: DecorationImage(
+                        image: NetworkImage(imageUrl),
+                      ),
                     ),
                     alignment: Alignment.center,
-                    child: Text(
-                      'Slider $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
                   );
                 },
               );
@@ -53,7 +55,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
             valueListenable: _selectedSlider,
             builder: (context, value, _) {
               List<Widget> list = [];
-              for (int i = 0; i < 4; i++) {
+              for (int i = 0; i < widget.imageList.length; i++) {
                 list.add(
                   Container(
                     width: 15,

@@ -1,12 +1,15 @@
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
+import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
 import '../widgets/color_picker.dart';
 import '../widgets/home/product_image_slider.dart';
 import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  final Product product;
+  const ProductDetailsScreen({Key? key, required this.product})
+      : super(key: key);
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -40,7 +43,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   children: [
                     Stack(
                       children: [
-                        const ProductImageSlider(),
+                        ProductImageSlider(
+                          imageList: [widget.product.image ?? ''],
+                        ),
                         productDetailsAppBar,
                       ],
                     ),
@@ -64,10 +69,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Infinix Hot 10S',
-                  style: TextStyle(
+                  widget.product.title ?? '',
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
@@ -93,7 +98,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     color: Colors.amber,
                   ),
                   Text(
-                    '4.5',
+                    '${widget.product.star ?? 0}',
                     style: TextStyle(
                       color: Colors.blueGrey.shade500,
                       fontSize: 18,
@@ -182,9 +187,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Text(
-            'Infinix Hot 10s price starts from BDT. 12,990. Infinix Hot 10s internal storage base variant of 4 GB, 6 GB Ram, 64 GB, 128 GB Internal Memory (ROM). Infinix Hot 10s which is available in Black, Purple, Morandi Green, Heart of Ocean colour.',
-            style: TextStyle(
+          Text(
+            widget.product.shortDes ?? '',
+            style: const TextStyle(
               fontSize: 16,
               color: Colors.grey,
             ),
@@ -236,7 +241,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$ 99',
+                '\$ ${widget.product.price ?? 0}',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
