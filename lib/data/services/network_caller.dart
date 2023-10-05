@@ -4,7 +4,7 @@ import 'dart:convert';
 import '../models/network_response.dart';
 
 class NetworkCaller {
-  Future<NetworkResponse> getRequest(String url) async {
+  static Future<NetworkResponse> getRequest(String url) async {
     try {
       Response response = await get(
         Uri.parse(url),
@@ -32,7 +32,7 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
+ static Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
       {bool isLogin = false}) async {
     try {
       log(body.toString());
@@ -65,7 +65,7 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  Future<void> gotoLogin() async {
+  static Future<void> gotoLogin() async {
     /*await AuthUtility.clearUserInfo();
     Navigator.pushAndRemoveUntil(
         TaskManagerApp.globalKey.currentContext!,

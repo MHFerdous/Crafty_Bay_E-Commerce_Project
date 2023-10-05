@@ -18,7 +18,7 @@ class CategoryController extends GetxController {
   Future<bool> getCategories() async {
     _getCategoriesInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller().getRequest(
+    final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.getCategories,
     );
     _getCategoriesInProgress = false;

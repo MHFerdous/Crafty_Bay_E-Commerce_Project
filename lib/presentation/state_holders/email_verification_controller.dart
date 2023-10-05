@@ -14,7 +14,7 @@ class EmailVerificationController extends GetxController {
   Future<bool> verifyEmail(String email) async {
     _emailVerificationInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller().getRequest(
+    final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.verifyEmail(email),
     );
     _emailVerificationInProgress = false;

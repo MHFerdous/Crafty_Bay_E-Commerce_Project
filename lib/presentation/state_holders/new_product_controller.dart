@@ -21,7 +21,7 @@ class NewProductController extends GetxController {
     _getNewProductsInProgress = true;
     update();
 
-    final NetworkResponse response = await NetworkCaller().getRequest(
+    final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.getProductsByRemarks('popular'),
     );
     _getNewProductsInProgress = false;

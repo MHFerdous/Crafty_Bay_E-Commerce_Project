@@ -1,4 +1,5 @@
 import 'package:crafty_bay/data/models/product_details.dart';
+import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_extension.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
@@ -21,6 +22,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
+  int _selectedSizeIndex = 0;
 
   @override
   void initState() {
@@ -65,14 +67,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             productDetailsAppBar,
                           ],
                         ),
-                        productDetails(productDetailsController.productDetails,
+                        productDetailsWidget(
+                            productDetailsController.productDetails,
                             productDetailsController.availableColors),
                       ],
                     ),
                   ),
                 ),
                 addToCartBottomContainer(
-                    productDetailsController.productDetails),
+                  productDetailsController.productDetails,
+                  productDetailsController.availableColors,
+                  productDetailsController.availableSizes,
+                ),
               ],
             ),
           );
@@ -81,7 +87,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Padding productDetails(ProductDetails productDetails, List<String> colors) {
+  Padding productDetailsWidget(
+      ProductDetails productDetails, List<String> colors) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -224,7 +231,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             height: 35,
             child: SizePicker(
               initialSelected: 0,
-              onSelected: (int selectIndex) {},
+              onSelected: (int selectIndex) {
+                _selectedSizeIndex = selectIndex;
+              },
               sizes: productDetails.size?.split(',') ?? [],
             ),
           ),
@@ -267,7 +276,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Container addToCartBottomContainer(ProductDetails productDetails) {
+  Container addToCartBottomContainer(
+      ProductDetails productDetails, List<String> colors, List<String> sizes) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
@@ -306,9 +316,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
           SizedBox(
             width: 120,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Add to Cart'),
+            child: GetBuilder<AddToCartController>(
+              builder: (addToCartController) {
+                if (addToCartController.addToCartInProgress) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ElevatedButton(
+                  onPressed: () {
+                    addToCartController.addToCart(
+                      productDetails.id!,
+                      colors[_selectedColorIndex].toString(),
+                      sizes[_selectedSizeIndex],
+                    );
+                  },
+                  child: const Text('Add to Cart'),
+                );
+              },
             ),
           )
         ],
