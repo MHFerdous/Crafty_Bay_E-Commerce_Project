@@ -22,7 +22,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
           options: CarouselOptions(
             viewportFraction: 1,
             height: 260.0,
-            autoPlay: true,
+            autoPlay: false,
             autoPlayAnimationDuration: const Duration(seconds: 3),
             onPageChanged: (int page, _) {
               _selectedSlider.value = page;

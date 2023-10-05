@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
-import '../widgets/color_picker.dart';
 import '../widgets/home/product_image_slider.dart';
 import '../widgets/size_picker.dart';
 
@@ -21,15 +20,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<String> colors = [];
-
-  List<String> sizes = [
-    'mini',
-    'max',
-  ];
-
   int _selectedColorIndex = 0;
-  int _selectedSizeIndex = 0;
 
   @override
   void initState() {
@@ -90,7 +81,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Padding productDetails(ProductDetails productDetails, List<String> color) {
+  Padding productDetails(ProductDetails productDetails, List<String> colors) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -233,9 +224,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             height: 35,
             child: SizePicker(
               initialSelected: 0,
-              onSelected: (int selectIndex) {
-                _selectedSizeIndex = selectIndex;
-              },
+              onSelected: (int selectIndex) {},
               sizes: productDetails.size?.split(',') ?? [],
             ),
           ),

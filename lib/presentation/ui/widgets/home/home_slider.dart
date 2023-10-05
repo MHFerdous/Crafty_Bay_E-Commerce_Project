@@ -21,7 +21,7 @@ class _HomeSliderState extends State<HomeSlider> {
           options: CarouselOptions(
             viewportFraction: 1,
             height: 180.0,
-            autoPlay: false,
+            autoPlay: true,
             autoPlayAnimationDuration: const Duration(seconds: 3),
             onPageChanged: (int page, _) {
               _selectedSlider.value = page;
