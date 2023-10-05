@@ -4,9 +4,9 @@ import '../utility/app_colors.dart';
 class ColorPicker extends StatefulWidget {
   const ColorPicker(
       {Key? key,
-        required this.colors,
-        required this.onSelected,
-        required this.initialSelected})
+      required this.colors,
+      required this.onSelected,
+      required this.initialSelected})
       : super(key: key);
 
   final List<Color> colors;
@@ -44,15 +44,15 @@ class _ColorPickerState extends State<ColorPicker> {
           },
           child: CircleAvatar(
             radius: 15,
-            backgroundColor: widget.colors[index],
+            //backgroundColor: widget.colors[index],
             child: _selectedColorIndex == index
                 ? CircleAvatar(
-              backgroundColor: AppColors.primaryColor,
-              child: const Icon(
-                Icons.done_outlined,
-                color: Colors.white,
-              ),
-            )
+                    backgroundColor: AppColors.primaryColor,
+                    child: const Icon(
+                      Icons.done_outlined,
+                      color: Colors.white,
+                    ),
+                  )
                 : null,
           ),
         );

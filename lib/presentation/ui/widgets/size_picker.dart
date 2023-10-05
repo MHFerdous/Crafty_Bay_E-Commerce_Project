@@ -42,12 +42,12 @@ class _SizePickerState extends State<SizePicker> {
             }
           },
           child: Container(
-            width: 35,
-            height: 35,
+            width: 50,
+            height: 50,
             margin: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
               color:
               _selectedSizeIndex == index ? AppColors.primaryColor : null,
             ),

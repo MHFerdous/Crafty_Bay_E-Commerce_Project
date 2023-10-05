@@ -1,5 +1,9 @@
+import 'package:crafty_bay/data/models/product_details.dart';
+import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/utility/color_extension.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
 import '../widgets/color_picker.dart';
@@ -7,8 +11,9 @@ import '../widgets/home/product_image_slider.dart';
 import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  final Product product;
-  const ProductDetailsScreen({Key? key, required this.product})
+  final int productId;
+  const ProductDetailsScreen(
+      {Key? key, required this.productId, required Product product})
       : super(key: key);
 
   @override
@@ -16,12 +21,7 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
-  List<Color> colors = [
-    Colors.black,
-    Colors.grey,
-    Colors.green,
-    Colors.blue,
-  ];
+  List<String> colors = [];
 
   List<String> sizes = [
     'mini',
@@ -32,36 +32,65 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedSizeIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Stack(
+      body: GetBuilder<ProductDetailsController>(
+        builder: (productDetailsController) {
+          if (productDetailsController.getProductDetailsInProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return SafeArea(
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        ProductImageSlider(
-                          imageList: [widget.product.image ?? ''],
+                        Stack(
+                          children: [
+                            ProductImageSlider(
+                              imageList: [
+                                productDetailsController.productDetails.img1 ??
+                                    '',
+                                productDetailsController.productDetails.img2 ??
+                                    '',
+                                productDetailsController.productDetails.img3 ??
+                                    '',
+                                productDetailsController.productDetails.img4 ??
+                                    ''
+                              ],
+                            ),
+                            productDetailsAppBar,
+                          ],
                         ),
-                        productDetailsAppBar,
+                        productDetails(productDetailsController.productDetails,
+                            productDetailsController.availableColors),
                       ],
                     ),
-                    productDetails,
-                  ],
+                  ),
                 ),
-              ),
+                addToCartBottomContainer(
+                    productDetailsController.productDetails),
+              ],
             ),
-            addToCartBottomContainer
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Padding get productDetails {
+  Padding productDetails(ProductDetails productDetails, List<String> color) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -71,7 +100,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             children: [
               Expanded(
                 child: Text(
-                  widget.product.title ?? '',
+                  productDetails.product?.title ?? '',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -98,7 +127,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     color: Colors.amber,
                   ),
                   Text(
-                    '${widget.product.star ?? 0}',
+                    '${productDetails.product?.star ?? 0}',
                     style: TextStyle(
                       color: Colors.blueGrey.shade500,
                       fontSize: 18,
@@ -143,14 +172,50 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
           SizedBox(
             height: 30,
-            child: ColorPicker(
-              colors: colors,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: colors.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {
+                    _selectedColorIndex = index;
+                    //widget.onSelected(index);
+
+                    if (mounted) {
+                      setState(() {});
+                    }
+                  },
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: HexColor.fromHex(colors[index]),
+                    child: _selectedColorIndex == index
+                        ? CircleAvatar(
+                            backgroundColor: AppColors.primaryColor,
+                            child: const Icon(
+                              Icons.done_outlined,
+                              color: Colors.white,
+                            ),
+                          )
+                        : null,
+                  ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  width: 8,
+                );
+              },
+            ),
+          ),
+          /*ColorPicker(
+              colors: HexColor.fromHex(colors[index]),
               onSelected: (int selectIndex) {
                 _selectedColorIndex = selectIndex;
               },
               initialSelected: 0,
-            ),
-          ),
+            ),*/
+
           const SizedBox(
             height: 16,
           ),
@@ -165,13 +230,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             height: 16,
           ),
           SizedBox(
-            height: 30,
+            height: 35,
             child: SizePicker(
-              sizes: sizes,
+              initialSelected: 0,
               onSelected: (int selectIndex) {
                 _selectedSizeIndex = selectIndex;
               },
-              initialSelected: 0,
+              sizes: productDetails.size?.split(',') ?? [],
             ),
           ),
           const SizedBox(
@@ -188,7 +253,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             height: 16,
           ),
           Text(
-            widget.product.shortDes ?? '',
+            productDetails.product?.shortDes ?? '',
             style: const TextStyle(
               fontSize: 16,
               color: Colors.grey,
@@ -213,7 +278,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Container get addToCartBottomContainer {
+  Container addToCartBottomContainer(ProductDetails productDetails) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
@@ -241,7 +306,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$ ${widget.product.price ?? 0}',
+                '\$ ${productDetails.product?.price ?? 0}',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,

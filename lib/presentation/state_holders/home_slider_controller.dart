@@ -34,3 +34,7 @@ class HomeSlidersController extends GetxController {
     }
   }
 }
+
+
+
+
