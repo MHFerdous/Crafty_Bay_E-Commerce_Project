@@ -3,6 +3,7 @@ import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/*
 class PopularProductListScreen extends StatefulWidget {
   const PopularProductListScreen({Key? key}) : super(key: key);
 
@@ -62,3 +63,4 @@ class _PopularProductListScreenState extends State<PopularProductListScreen> {
     );
   }
 }
+*/

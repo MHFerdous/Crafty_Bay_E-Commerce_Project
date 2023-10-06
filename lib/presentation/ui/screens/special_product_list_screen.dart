@@ -1,9 +1,9 @@
-import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../state_holders/special_product_controller.dart';
 
+/*
 class SpecialProductListScreen extends StatefulWidget {
   const SpecialProductListScreen({Key? key}) : super(key: key);
 
@@ -33,9 +33,9 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: GetBuilder<PopularProductController>(
+          child: GetBuilder<SpecialProductController>(
             builder: (specialProductController) {
-              if (specialProductController.getPopularProductsInProgress) {
+              if (specialProductController.getSpecialProductsInProgress) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -48,13 +48,13 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
                   mainAxisExtent: 160,
                 ),
                 itemCount:
-                    specialProductController.popularProductModel.data?.length ??
+                    specialProductController.specialProductModel.data?.length ??
                         0,
                 itemBuilder: (context, index) {
                   return FittedBox(
                     child: ProductCard(
                       product: specialProductController
-                          .popularProductModel.data![index],
+                          .specialProductModel.data![index],
                     ),
                   );
                 },
@@ -66,3 +66,4 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
     );
   }
 }
+*/
