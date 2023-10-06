@@ -4,12 +4,20 @@ import 'package:get/get.dart';
 import '../presentation/ui/screens/splash_screen.dart';
 import '../presentation/ui/utility/app_colors.dart';
 
-class CraftyBay extends StatelessWidget {
+class CraftyBay extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+
   const CraftyBay({Key? key}) : super(key: key);
 
   @override
+  State<CraftyBay> createState() => _CraftyBayState();
+}
+
+class _CraftyBayState extends State<CraftyBay> {
+  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: CraftyBay.globalKey,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       initialBinding: StateHolderBinder(),

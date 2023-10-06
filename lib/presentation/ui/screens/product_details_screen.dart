@@ -324,12 +324,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   );
                 }
                 return ElevatedButton(
-                  onPressed: () {
-                    addToCartController.addToCart(
+                  onPressed: () async {
+                    final result = await addToCartController
+                        .addToCart(
                       productDetails.id!,
                       colors[_selectedColorIndex].toString(),
                       sizes[_selectedSizeIndex],
                     );
+                    if (result) {
+                      Get.snackbar('Successful',
+                          'This product has been added to cart');
+                    }else{
+                      Get.snackbar('Failed',
+                          "This product couldn't be added to cart", colorText: Colors.red);
+                    }
                   },
                   child: const Text('Add to Cart'),
                 );
