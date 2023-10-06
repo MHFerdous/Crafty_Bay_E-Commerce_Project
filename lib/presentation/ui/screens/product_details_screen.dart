@@ -188,12 +188,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     radius: 15,
                     backgroundColor: HexColor.fromHex(colors[index]),
                     child: _selectedColorIndex == index
-                        ? CircleAvatar(
-                            backgroundColor: AppColors.primaryColor,
-                            child: const Icon(
-                              Icons.done_outlined,
-                              color: Colors.white,
-                            ),
+                        ? const Icon(
+                            Icons.done_outlined,
+                            color: Colors.white,
+                            size: 30,
                           )
                         : null,
                   ),
@@ -325,18 +323,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 }
                 return ElevatedButton(
                   onPressed: () async {
-                    final result = await addToCartController
-                        .addToCart(
+                    final result = await addToCartController.addToCart(
                       productDetails.id!,
                       colors[_selectedColorIndex].toString(),
                       sizes[_selectedSizeIndex],
                     );
                     if (result) {
-                      Get.snackbar('Successful',
-                          'This product has been added to cart');
-                    }else{
-                      Get.snackbar('Failed',
-                          "This product couldn't be added to cart", colorText: Colors.red);
+                      Get.snackbar(
+                          'Successful', 'This product has been added to cart');
+                    } else {
+                      Get.snackbar(
+                          'Failed', "This product couldn't be added to cart",
+                          colorText: Colors.red);
                     }
                   },
                   child: const Text('Add to Cart'),

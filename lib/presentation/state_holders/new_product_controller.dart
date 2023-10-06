@@ -22,7 +22,7 @@ class NewProductController extends GetxController {
     update();
 
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.getProductsByRemarks('popular'),
+      Urls.getProductsByRemarks('new'),
     );
     _getNewProductsInProgress = false;
     if (response.isSuccess) {

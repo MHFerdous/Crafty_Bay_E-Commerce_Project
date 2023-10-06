@@ -9,6 +9,7 @@ import 'package:crafty_bay/presentation/state_holders/special_product_controller
 import 'package:get/get.dart';
 import '../presentation/state_holders/main_bottom_nav_controller.dart';
 import '../presentation/state_holders/popular_product_controller.dart';
+import '../presentation/state_holders/product_list_controller.dart';
 
 class StateHolderBinder extends Bindings {
   @override
@@ -42,6 +43,9 @@ class StateHolderBinder extends Bindings {
     );
     Get.put(
       AddToCartController(),
+    );
+    Get.put(
+      ProductListController(),
     );
   }
 }

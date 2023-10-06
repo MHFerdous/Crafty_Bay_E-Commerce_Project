@@ -3,6 +3,7 @@ import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dar
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/new_product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/popular_product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/special_product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -131,6 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         return CategoryCard(
                           categoryData:
                               categoryController.categoryModel.data![index],
+                          onTap: () {
+                            Get.to(
+                              ProductListScreen(
+                                  categoryId: categoryController
+                                      .categoryModel.data![index].id!),
+                            );
+                          },
                         );
                       },
                     );
