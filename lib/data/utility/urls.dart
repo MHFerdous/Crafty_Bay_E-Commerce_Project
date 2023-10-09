@@ -20,4 +20,8 @@ class Urls {
 
   static String getProductByCategory(int categoryId) =>
       '$_baseUrl/ListProductByCategory/$categoryId';
+
+  static const String getCartList = '$_baseUrl/CartList';
+
+
 }

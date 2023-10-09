@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import '../../../data/models/cart_list_model.dart';
 import '../utility/app_colors.dart';
 import 'custom_stepper.dart';
 
 class CartProductCard extends StatelessWidget {
+  final CartData cartData;
   const CartProductCard({
     super.key,
+    required this.cartData,
   });
 
   @override
@@ -20,11 +23,12 @@ class CartProductCard extends StatelessWidget {
           Container(
             width: 90,
             height: 85,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
               image: DecorationImage(
                 image: NetworkImage(
-                    'https://th.bing.com/th/id/R.baa8ffc2cb81cc2eee057e2f798b4ee6?rik=AZBwG35FCmm%2beg&riu=http%3a%2f%2fwww.chooseyourmobile.com%2fwp-content%2fuploads%2f2020%2f11%2fInfinix-Hot-10-Colors-1280x853.jpg&ehk=B5o79Ys7RkSNFpEYX8HaRJoKNri7tud9Wy4WCfbz%2fEM%3d&risl=&pid=ImgRaw&r=0'),
+                  cartData.product?.image ?? '',
+                ),
               ),
             ),
           ),
@@ -44,9 +48,9 @@ class CartProductCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'Infinix Hot 10s',
-                              style: TextStyle(
+                             Text(
+                              cartData.product?.title ?? '',
+                              style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.black,
                               ),
@@ -55,14 +59,14 @@ class CartProductCard extends StatelessWidget {
                               height: 4,
                             ),
                             RichText(
-                              text: const TextSpan(
-                                style: TextStyle(
+                              text:  TextSpan(
+                                style: const TextStyle(
                                   fontSize: 13,
                                   color: Colors.black54,
                                 ),
                                 children: [
-                                  TextSpan(text: 'Color: Black '),
-                                  TextSpan(text: 'Size: max'),
+                                  TextSpan(text: 'Color: ${cartData.color ?? ''} '),
+                                  TextSpan(text: 'Size: ${cartData.size ?? ''}'),
                                 ],
                               ),
                             )
@@ -80,7 +84,7 @@ class CartProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$ 99',
+                        '\$ ${cartData.product?.price ?? ''}',
                         style: TextStyle(
                             color: AppColors.primaryColor,
                             fontSize: 18,

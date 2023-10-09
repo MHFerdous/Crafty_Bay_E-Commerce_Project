@@ -1,6 +1,7 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/color_extension.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
@@ -134,7 +135,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ],
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(
+                    () => const ReviewListScreen(),
+                  );
+                },
                 child: const Text(
                   'Reviews',
                   style: TextStyle(
@@ -279,7 +284,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor.withOpacity(0.15),
+        color: AppColors.primaryColor.withOpacity(0.20),
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(16),
           topLeft: Radius.circular(16),
@@ -303,7 +308,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$ ${productDetails.product?.price ?? 0}',
+                //'\$ /*${productDetails.product?.price ?? 0}*/',
+                '\$ 1000',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,

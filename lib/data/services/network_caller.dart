@@ -74,7 +74,8 @@ class NetworkCaller {
     Navigator.pushAndRemoveUntil(
         CraftyBay.globalKey.currentContext!,
         MaterialPageRoute(
-            builder: (context) => const EmailVerificationScreen()),
+          builder: (context) => const EmailVerificationScreen(),
+        ),
         (route) => false);
   }
 }
