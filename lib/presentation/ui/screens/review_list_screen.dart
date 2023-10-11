@@ -1,4 +1,6 @@
+import 'package:crafty_bay/presentation/ui/screens/add_review_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../utility/app_colors.dart';
 
 class ReviewListScreen extends StatefulWidget {
@@ -43,39 +45,43 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
 
   Container addReviewBottomContainer() {
     return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor.withOpacity(0.20),
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(16),
-              topLeft: Radius.circular(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor.withOpacity(0.20),
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(16),
+          topLeft: Radius.circular(16),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            'Reviews (10)',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Reviews (10)',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: AppColors.primaryColor,
+            child: IconButton(
+              onPressed: () {
+                Get.to(
+                  () => const AddReviewScreen(),
+                );
+              },
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
               ),
-              CircleAvatar(
-                radius: 22,
-                backgroundColor: AppColors.primaryColor,
-                child: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                ),
-              )
-            ],
-          ),
-        );
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Padding get reviewCard {
