@@ -37,10 +37,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 26,
                 ),
                 Text(
-                  'Welcome Back',
+                  'Welcome',
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge
@@ -54,10 +54,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall
-                      ?.copyWith(color: Colors.grey),
+                      ?.copyWith(color: Colors.grey.shade500),
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 26,
                 ),
                 TextFormField(
                   controller: _emailTEController,
@@ -121,7 +121,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         ),
       );
     } else {
-      Get.snackbar('Failed', controller.message);
+      Get.snackbar('Failed', controller.message, backgroundColor: Colors.red);
     }
   }
+
+
 }
