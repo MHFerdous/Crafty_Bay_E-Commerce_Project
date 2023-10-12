@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:crafty_bay/application/state_holder_binder.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,45 @@ class CraftyBay extends StatefulWidget {
 }
 
 class _CraftyBayState extends State<CraftyBay> {
+  late final StreamSubscription _connectivityStatusStream;
+
+  @override
+  void initState() {
+    checkInitialInternetConnection();
+    checkInternetConnectivityStatus();
+    super.initState();
+  }
+
+  Future<void> checkInitialInternetConnection() async {
+    final result = await Connectivity().checkConnectivity();
+    handleConnectivityStatus(result);
+  }
+
+  void checkInternetConnectivityStatus() {
+    _connectivityStatusStream = Connectivity().onConnectivityChanged.listen(
+      (status) {
+        handleConnectivityStatus(status);
+      },
+    );
+  }
+
+  void handleConnectivityStatus(ConnectivityResult status) {
+    if (status != ConnectivityResult.mobile &&
+        status != ConnectivityResult.wifi) {
+      Get.showSnackbar(
+        const GetSnackBar(
+          title: 'No Internet',
+          message: 'Please check your internet connection',
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else {
+      if (Get.isSnackbarOpen) {
+        Get.closeAllSnackbars();
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -50,5 +91,11 @@ class _CraftyBayState extends State<CraftyBay> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _connectivityStatusStream.cancel();
+    super.dispose();
   }
 }

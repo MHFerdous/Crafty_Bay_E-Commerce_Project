@@ -65,7 +65,7 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
             ),
           ),
           CircleAvatar(
-            radius: 22,
+            radius: 20,
             backgroundColor: AppColors.primaryColor,
             child: IconButton(
               onPressed: () {

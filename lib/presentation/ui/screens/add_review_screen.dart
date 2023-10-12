@@ -21,14 +21,31 @@ class AddReviewScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            const SizedBox(
+              height: 16,
+            ),
             TextFormField(),
+            const SizedBox(
+              height: 8,
+            ),
             TextFormField(),
+            const SizedBox(
+              height: 8,
+            ),
             TextFormField(),
+            const SizedBox(
+              height: 16,
+            ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Submit'),
               ),
             )
           ],
