@@ -110,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               const SizedBox(
-                height: 16,
+                height: 10,
               ),
               SizedBox(
                 height: 90,
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 16,
+                height: 10,
               ),
               SectionHeader(
                 title: 'Popular',
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: 10,
               ),
               SectionHeader(
                 title: 'Special',

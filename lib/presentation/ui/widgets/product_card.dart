@@ -30,7 +30,7 @@ class ProductCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
         ),
         child: SizedBox(
-          width: 130,
+          width: 120,
           child: Column(
             children: [
               Container(
@@ -60,7 +60,7 @@ class ProductCard extends StatelessWidget {
                           fontSize: 13),
                     ),
                     const SizedBox(
-                      height: 2,
+                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
