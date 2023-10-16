@@ -50,7 +50,18 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.notifications_active_outlined,
               onTap: () {},
-            )
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            CircularIconButton(
+              icon: Icons.light_mode_outlined,
+              onTap: () {
+                Get.changeTheme(
+                  Get.isDarkMode ? ThemeData.light() : ThemeData.dark(),
+                );
+              },
+            ),
           ],
         ),
       ),
