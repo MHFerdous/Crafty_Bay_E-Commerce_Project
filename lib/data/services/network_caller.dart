@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
-import 'package:crafty_bay/application/app.dart';
-import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'dart:convert';
+import '../../application/app.dart';
+import '../../presentation/state_holders/auth_controller.dart';
 import '../../presentation/ui/screens/auth/email_verification_screen.dart';
 import '../models/network_response.dart';
 
@@ -27,7 +27,11 @@ class NetworkCaller {
       } else if (response.statusCode == 401) {
         gotoLogin();
       } else {
-        return NetworkResponse(false, response.statusCode, null);
+        return NetworkResponse(
+          false,
+          response.statusCode,
+          null,
+        );
       }
     } catch (e) {
       log(e.toString());
@@ -39,16 +43,17 @@ class NetworkCaller {
       String url, Map<String, dynamic> body,
       {bool isLogin = false}) async {
     try {
-      log(body.toString());
       Response response = await post(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString(),
+          'token': AuthController.accessToken.toString()
         },
         body: jsonEncode(body),
       );
-      log(response.statusCode.toString());
+      log(
+        response.statusCode.toString(),
+      );
       log(response.body);
       if (response.statusCode == 200) {
         return NetworkResponse(
@@ -61,7 +66,11 @@ class NetworkCaller {
           gotoLogin();
         }
       } else {
-        return NetworkResponse(false, response.statusCode, null);
+        return NetworkResponse(
+          false,
+          response.statusCode,
+          null,
+        );
       }
     } catch (e) {
       log(e.toString());

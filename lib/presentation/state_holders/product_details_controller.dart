@@ -1,8 +1,10 @@
-import 'package:crafty_bay/data/models/network_response.dart';
-import 'package:crafty_bay/data/models/product_details_model.dart';
-import 'package:crafty_bay/data/services/network_caller.dart';
+
 import 'package:get/get.dart';
-import 'package:crafty_bay/data/models/product_details.dart';
+
+import '../../data/models/network_response.dart';
+import '../../data/models/product_details.dart';
+import '../../data/models/product_details_model.dart';
+import '../../data/services/network_caller.dart';
 import '../../data/utility/urls.dart';
 
 class ProductDetailsController extends GetxController {
@@ -13,27 +15,28 @@ class ProductDetailsController extends GetxController {
   List<String> _availableSizes = [];
 
   bool get getProductDetailsInProgress => _getProductDetailsInProgress;
+
   ProductDetails get productDetails => _productDetails;
-  String get errorMessage => _errorMessage;
+
   List<String> get availableColors => _availableColors;
+
   List<String> get availableSizes => _availableSizes;
+
+  String get errorMessage => _errorMessage;
 
   Future<bool> getProductDetails(int id) async {
     _getProductDetailsInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.getProductDetails(id),
-    );
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.getProductDetails(id));
     _getProductDetailsInProgress = false;
     if (response.isSuccess) {
-      _productDetails =
-          ProductDetailsModel.fromJson(response.responseJson ?? {}).data!.first;
+      _productDetails = (ProductDetailsModel.fromJson(response.responseJson ?? {})).data!.first;
       _convertStringToColor(_productDetails.color ?? '');
       _convertStringToSizes(_productDetails.size ?? '');
       update();
       return true;
     } else {
-      _errorMessage = 'Product details fetching failed. Try again';
+      _errorMessage = 'Fetch product details has been failed! Try again.';
       update();
       return false;
     }
@@ -52,4 +55,5 @@ class ProductDetailsController extends GetxController {
   void _convertStringToSizes(String sizes) {
     _availableSizes = sizes.split(',');
   }
+
 }
