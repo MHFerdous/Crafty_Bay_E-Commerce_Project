@@ -46,7 +46,7 @@ class _CartScreenState extends State<CartScreen> {
           children: [
             Expanded(
               child: ListView.builder(
-                itemCount: cartListController.cartListModel.data?.length ?? 1,
+                itemCount: /*cartListController.cartListModel.data?.length ??*/ 1,
                 itemBuilder: (context, index) {
                   return CartProductCard(
                     cartData: cartListController.cartListModel.data![index],
