@@ -17,8 +17,15 @@ class AuthController {
         await SharedPreferences.getInstance();
     _accessToken = sharedPreferences.getString('access_token');
   }
-  static Future<void> clear() async{
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+  static Future<void> saveProfileDetails(String data) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.setString('user-data', data);
+  }
+
+  static Future<void> clear() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.clear();
   }
 

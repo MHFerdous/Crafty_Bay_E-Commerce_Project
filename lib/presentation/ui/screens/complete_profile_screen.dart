@@ -1,10 +1,9 @@
-import 'package:crafty_bay/data/models/complete_profile_model.dart';
-import 'package:crafty_bay/presentation/state_holders/complete_profile_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_profile_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/read_profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
 import '../utility/image_assets.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -27,7 +26,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<CompleteProfileController>().completeProfileModel;
+      Get.find<CreateProfileController>().createProfileModel;
+      Get.find<ReadProfileController>().readProfileModel;
     });
   }
 
@@ -166,37 +166,37 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: GetBuilder<CompleteProfileController>(
-                        builder: (completeProfileController) {
-                      if (completeProfileController.completeProfileInProgress) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return ElevatedButton(
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final result =
-                                await completeProfileController.completeProfile(
-                              _firstNameTEController.text.trim(),
-                              _lastNameTEController.text.trim(),
-                              _phoneTEController.text.trim(),
-                              _cityTEController.text.trim(),
-                              _shippingAddressTEController.text.trim(),
-                            );
-                            if(result){
-                              Get.snackbar('Successful', 'Profile has been created');
-                              Get.offAll(
-                                () => const MainBottomNavScreen(),
+                    child: GetBuilder<CreateProfileController>(
+                      builder: (completeProfileController) {
+                        if (completeProfileController.createProfileInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              final result = await completeProfileController
+                                  .completeProfile(
+                                _firstNameTEController.text.trim(),
+                                _lastNameTEController.text.trim(),
+                                _phoneTEController.text.trim(),
+                                _cityTEController.text.trim(),
+                                _shippingAddressTEController.text.trim(),
                               );
+                              if (result) {
+                                Get.snackbar(
+                                    'Successful', 'Profile has been created');
+                                Get.offAll(
+                                  () => const MainBottomNavScreen(),
+                                );
+                              }
                             }
-
-
-                          }
-                        },
-                        child: const Text('Confirm'),
-                      );
-                    }),
+                          },
+                          child: const Text('Confirm'),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

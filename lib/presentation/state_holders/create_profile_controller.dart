@@ -1,24 +1,24 @@
-import 'package:crafty_bay/data/models/complete_profile_model.dart';
+import 'package:crafty_bay/data/models/create_profile_model.dart';
 import 'package:crafty_bay/data/models/network_response.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../data/utility/urls.dart';
 
-class CompleteProfileController extends GetxController {
-  bool _completeProfileInProgress = false;
+class CreateProfileController extends GetxController {
+  bool _createProfileInProgress = false;
   String _message = '';
-  CompleteProfileModel _completeProfileModel = CompleteProfileModel();
+  CreateProfileModel _createProfileModel = CreateProfileModel();
 
-  bool get completeProfileInProgress => _completeProfileInProgress;
+  bool get createProfileInProgress => _createProfileInProgress;
   String get message => _message;
-  CompleteProfileModel get completeProfileModel => _completeProfileModel;
+  CreateProfileModel get createProfileModel => _createProfileModel;
 
   Future<bool> completeProfile(String firstName, String lastName, String phone,
       String city, String address) async {
-    _completeProfileInProgress = true;
+    _createProfileInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.postRequest(
-      Urls.completeProfile,
+      Urls.createProfile,
       {
         "firstName": firstName,
         "lastName": lastName,
@@ -27,8 +27,9 @@ class CompleteProfileController extends GetxController {
         "shippingAddress": address,
       },
     );
-    _completeProfileInProgress = false;
+    _createProfileInProgress = false;
     if (response.isSuccess) {
+      //CreateProfileModel.
       return true;
     } else {
       return false;
