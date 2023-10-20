@@ -8,7 +8,6 @@ class EmailVerificationController extends GetxController {
   String _message = '';
 
   bool get emailVerificationInProgress => _emailVerificationInProgress;
-
   String get message => _message;
 
   Future<bool> verifyEmail(String email) async {

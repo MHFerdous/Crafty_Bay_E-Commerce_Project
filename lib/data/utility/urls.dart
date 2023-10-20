@@ -23,5 +23,7 @@ class Urls {
 
   static const String getCartList = '$_baseUrl/CartList';
 
+  static const String completeProfile = '$_baseUrl/CreateProfile';
+
 
 }
