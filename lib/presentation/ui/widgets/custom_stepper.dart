@@ -2,14 +2,6 @@ import 'package:flutter/material.dart';
 import '../utility/app_colors.dart';
 
 class CustomStepper extends StatefulWidget {
-  /*CustomStepper({
-    super.key,
-    required this.lowerLimit,
-    required this.upperLimit,
-    required this.stepValue,
-    required this.value,
-    required this.onChange,
-  });*/
   CustomStepper(
       {Key? key,
       required this.lowerLimit,
@@ -43,8 +35,9 @@ class _CustomStepperState extends State<CustomStepper> {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(3)),
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(3),
+              ),
               child: const Icon(
                 Icons.remove,
                 color: Colors.white,
@@ -65,6 +58,7 @@ class _CustomStepperState extends State<CustomStepper> {
               '${widget.value}',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: Colors.black,
+                    fontSize: 22,
                   ),
               textAlign: TextAlign.center,
             ),
@@ -74,8 +68,9 @@ class _CustomStepperState extends State<CustomStepper> {
             child: Container(
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(3)),
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(3),
+              ),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,

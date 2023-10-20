@@ -43,7 +43,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             color: Colors.black,
           ),
         ),
-        elevation: 3,
+        elevation: 2,
         backgroundColor: Colors.white,
       ),
       body: RefreshIndicator(

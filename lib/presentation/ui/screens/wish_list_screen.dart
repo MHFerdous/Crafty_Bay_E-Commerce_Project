@@ -28,6 +28,7 @@ class _WishListScreenState extends State<WishListScreen> {
           leading: const BackButton(
             color: Colors.black,
           ),
+          elevation: 2,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
