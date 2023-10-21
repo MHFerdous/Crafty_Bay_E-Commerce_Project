@@ -28,4 +28,6 @@ class Urls {
   static const String readProfile = '$_baseUrl/ReadProfile';
 
   static String removeFromCart(int id) => '$_baseUrl/DeleteCartList/$id';
+
+
 }

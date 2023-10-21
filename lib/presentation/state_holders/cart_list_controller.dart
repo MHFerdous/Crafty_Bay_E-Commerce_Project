@@ -23,10 +23,11 @@ class CartListController extends GetxController {
     _getCartListInProgress = false;
     if (response.isSuccess) {
       _cartListModel = CartListModel.fromJson(response.responseJson!);
+      _calculateTotalPrice();
       update();
       return true;
     } else {
-      _message = 'get cart list failed! Try again';
+      _message = 'Get cart list failed! Try again';
       return false;
     }
   }
@@ -60,8 +61,7 @@ class CartListController extends GetxController {
     _totalPrice = 0;
     for (CartData data in _cartListModel.data ?? []) {
       _totalPrice += ((data.quantity ?? 1) *
-            (double.tryParse(data.product?.price ?? '0') ?? 0),
-      ) as double;
+          (double.tryParse(data.product?.price ?? '0') ?? 0));
     }
     update();
   }

@@ -1,19 +1,16 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
-import 'package:crafty_bay/presentation/ui/utility/color_extension.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
 import '../widgets/home/product_image_slider.dart';
 import '../widgets/size_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
-  const ProductDetailsScreen(
-      {super.key, required this.productId});
+  const ProductDetailsScreen({super.key, required this.productId});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -107,7 +104,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 stepValue: 1,
                 value: 1,
                 onChange: (newValue) {
-                  print(newValue);
                   quantity = newValue;
                 },
               )
@@ -246,11 +242,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       decoration: BoxDecoration(
-          color: AppColors.primaryColor.withOpacity(0.15),
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16),
-            topRight: Radius.circular(16),
-          )),
+        color: AppColors.primaryColor.withOpacity(0.15),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -268,7 +265,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 height: 4,
               ),
               Text(
-                '\$1000',
+                '\$ ${details.product?.price ?? 0}',
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 18,

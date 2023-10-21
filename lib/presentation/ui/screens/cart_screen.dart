@@ -93,7 +93,7 @@ class _CartScreenState extends State<CartScreen> {
                             height: 4,
                           ),
                           Text(
-                            '\$ 495',
+                            '\$ ${cartListController.totalPrice}',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,

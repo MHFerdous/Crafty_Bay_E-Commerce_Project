@@ -46,61 +46,64 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(4),
-                child: Column(
-                  children: [
-                    Text(
-                      product.title ?? '',
-                      maxLines: 1,
-                      style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.blueGrey.shade600,
-                          fontSize: 13),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '\$ ${product.price ?? 0}',
-                          style: TextStyle(
-                            color: AppColors.primaryColor,
-                          ),
-                        ),
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Colors.amber,
+              Container(
+                color: AppColors.primaryColor.withOpacity(0.1),
+                child: Padding(
+                  padding: const EdgeInsets.all(4),
+                  child: Column(
+                    children: [
+                      Text(
+                        product.title ?? '',
+                        maxLines: 1,
+                        style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.blueGrey.shade600,
+                            fontSize: 13),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '\$ ${product.price ?? 0}',
+                            style: TextStyle(
+                              color: AppColors.primaryColor,
                             ),
-                            Text(
-                              '${product.star ?? 0}',
-                              style: TextStyle(
-                                color: Colors.blueGrey.shade500,
+                          ),
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.star,
+                                size: 16,
+                                color: Colors.amber,
+                              ),
+                              Text(
+                                '${product.star ?? 0}',
+                                style: TextStyle(
+                                  color: Colors.blueGrey.shade500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Card(
+                            color: AppColors.primaryColor,
+                            child: const Padding(
+                              padding: EdgeInsets.all(2),
+                              child: Icon(
+                                Icons.favorite_outline,
+                                size: 12,
+                                color: Colors.white,
                               ),
                             ),
-                          ],
-                        ),
-                        Card(
-                          color: AppColors.primaryColor,
-                          child: const Padding(
-                            padding: EdgeInsets.all(2),
-                            child: Icon(
-                              Icons.favorite_outline,
-                              size: 12,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

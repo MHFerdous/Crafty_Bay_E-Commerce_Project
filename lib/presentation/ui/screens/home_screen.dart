@@ -173,7 +173,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(
-                height: 180,
+                height: 176,
                 child: GetBuilder<PopularProductController>(
                   builder: (popularProductController) {
                     if (popularProductController.getPopularProductsInProgress) {
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(
-                height: 180,
+                height: 176,
                 child: GetBuilder<SpecialProductController>(
                   builder: (specialController) {
                     if (specialController.getSpecialProductsInProgress) {
@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(
-                height: 180,
+                height: 176,
                 child: GetBuilder<NewProductController>(
                   builder: (newController) {
                     if (newController.getNewProductsInProgress) {
