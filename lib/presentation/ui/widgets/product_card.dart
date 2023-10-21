@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/add_to_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -89,17 +90,33 @@ class ProductCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Card(
-                            color: AppColors.primaryColor,
-                            child: const Padding(
-                              padding: EdgeInsets.all(2),
-                              child: Icon(
-                                Icons.favorite_outline,
-                                size: 12,
-                                color: Colors.white,
+                          GetBuilder<WishListController>(
+                              builder: (wishListController) {
+                            return InkWell(
+                              onTap: () async{
+                                final result = await wishListController.addToWishList(product.id!);
+                                if (result) {
+                                  Get.snackbar(
+                                      'Successful', 'This product has been added to wish list');
+                                } else {
+                                  Get.snackbar(
+                                      'Failed', "This product couldn't be added to wish list",
+                                      colorText: Colors.red);
+                                }
+                              },
+                              child: Card(
+                                color: AppColors.primaryColor,
+                                child: const Padding(
+                                  padding: EdgeInsets.all(2),
+                                  child: Icon(
+                                    Icons.favorite_outline,
+                                    size: 12,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
+                            );
+                          },)
                         ],
                       ),
                     ],

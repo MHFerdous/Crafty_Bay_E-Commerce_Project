@@ -1,3 +1,5 @@
+import 'package:crafty_bay/presentation/state_holders/add_to_wish_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
@@ -7,7 +9,6 @@ import 'package:crafty_bay/presentation/state_holders/special_product_controller
 import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/wish_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
-import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'cart_screen.dart';
@@ -36,6 +37,8 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
       Get.find<PopularProductController>().getPopularProducts();
       Get.find<NewProductController>().getNewProducts();
       Get.find<SpecialProductController>().getSpecialProducts();
+      Get.find<CartListController>().getCartList();
+      Get.find<WishListController>().wishList();
     });
     super.initState();
   }
