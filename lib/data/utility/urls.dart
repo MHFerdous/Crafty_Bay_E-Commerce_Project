@@ -1,5 +1,5 @@
 class Urls {
-  static const String _baseUrl = 'https://craftybay.teamrabbil.com/api';
+  static const String _baseUrl = 'https://ecom-api.teamrabbil.com/api';
 
   static String verifyEmail(String email) => '$_baseUrl/UserLogin/$email';
 
@@ -27,5 +27,5 @@ class Urls {
 
   static const String readProfile = '$_baseUrl/ReadProfile';
 
-
+  static String removeFromCart(int id) => '$_baseUrl/DeleteCartList/$id';
 }

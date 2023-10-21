@@ -18,7 +18,7 @@ class ProductCard extends StatelessWidget {
       onTap: () {
         Get.to(
           ProductDetailsScreen(
-            product: product,
+            //product: product,
             productId: product.id!,
           ),
         );

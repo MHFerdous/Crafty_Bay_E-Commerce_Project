@@ -13,7 +13,7 @@ import '../widgets/size_picker.dart';
 class ProductDetailsScreen extends StatefulWidget {
   final int productId;
   const ProductDetailsScreen(
-      {super.key, required this.productId, required Product product});
+      {super.key, required this.productId});
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -22,6 +22,7 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int _selectedColorIndex = 0;
   int _selectedSizeIndex = 0;
+  int quantity = 1;
 
   @override
   void initState() {
@@ -107,6 +108,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 value: 1,
                 onChange: (newValue) {
                   print(newValue);
+                  quantity = newValue;
                 },
               )
             ],
@@ -167,37 +169,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
           SizedBox(
             height: 30,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemCount: colors.length,
-              itemBuilder: (context, index) {
-                print(colors[index]);
-                return InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  onTap: () {
-                    _selectedColorIndex = index;
-                    if (mounted) {
-                      setState(() {});
-                    }
-                  },
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: HexColor.fromHex(colors[index]),
-                    child: _selectedColorIndex == index
-                        ? const Icon(
-                            Icons.done_outlined,
-                            size: 26,
-                            color: Colors.white,
-                          )
-                        : null,
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  width: 10,
-                );
-              },
+            child: SizedBox(
+              height: 28,
+              child: SizePicker(
+                initialSelected: 0,
+                onSelected: (int selectedSize) {
+                  _selectedColorIndex = selectedSize;
+                },
+                sizes: productDetails.color?.split(',') ?? [],
+              ),
             ),
           ),
           const SizedBox(
@@ -311,6 +291,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     details.id!,
                     colors[_selectedColorIndex].toString(),
                     sizes[_selectedSizeIndex],
+                    quantity,
                   );
                   if (result) {
                     Get.snackbar(

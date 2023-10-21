@@ -21,7 +21,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
         CarouselSlider(
           options: CarouselOptions(
             viewportFraction: 1,
-            height: 260.0,
+            height: 300.0,
             autoPlay: false,
             autoPlayAnimationDuration: const Duration(seconds: 3),
             onPageChanged: (int page, _) {
@@ -35,7 +35,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                   return Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
+                      //color: Colors.grey.shade300,
                       image: DecorationImage(
                         image: NetworkImage(imageUrl),
                       ),
@@ -48,7 +48,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
           ).toList(),
         ),
         Positioned(
-          bottom: 10,
+          bottom: 0,
           left: 0,
           right: 0,
           child: ValueListenableBuilder(
@@ -62,8 +62,8 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                     height: 15,
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: value == i ? AppColors.primaryColor : Colors.white,
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),                      color: value == i ? AppColors.primaryColor : Colors.white,
                     ),
                   ),
                 );

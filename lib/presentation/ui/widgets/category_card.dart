@@ -25,14 +25,14 @@ class CategoryCard extends StatelessWidget {
               height: 60,
               width: 60,
               margin: const EdgeInsets.symmetric(horizontal: 8),
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Image.network(
                 categoryData.categoryImg ?? '',
-                height: 50,
+               // height: 10,
               ),
             ),
             const SizedBox(

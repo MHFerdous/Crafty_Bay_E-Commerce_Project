@@ -20,7 +20,7 @@ class _HomeSliderState extends State<HomeSlider> {
         CarouselSlider(
           options: CarouselOptions(
             viewportFraction: 1,
-            height: 180.0,
+            height: 170,
             autoPlay: true,
             autoPlayAnimationDuration: const Duration(seconds: 3),
             onPageChanged: (int page, _) {
@@ -35,7 +35,7 @@ class _HomeSliderState extends State<HomeSlider> {
                     width: MediaQuery.of(context).size.width,
                     margin: const EdgeInsets.symmetric(horizontal: 5.0),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.2),
+                      color: AppColors.primaryColor.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
