@@ -5,12 +5,19 @@ import 'package:get/get.dart';
 import '../../../data/models/product.dart';
 import '../utility/app_colors.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard({
     super.key,
     required this.product,
   });
   final Product product;
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  bool _isTap = false;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +27,7 @@ class ProductCard extends StatelessWidget {
         Get.to(
           ProductDetailsScreen(
             //product: product,
-            productId: product.id!,
+            productId: widget.product.id!,
           ),
         );
       },
@@ -43,18 +50,21 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(8),
                   ),
                   image: DecorationImage(
-                    image: NetworkImage(product.image ?? ''),
+                    image: NetworkImage(widget.product.image ?? ''),
                   ),
                 ),
               ),
               Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
                 color: AppColors.primaryColor.withOpacity(0.1),
                 child: Padding(
                   padding: const EdgeInsets.all(4),
                   child: Column(
                     children: [
                       Text(
-                        product.title ?? '',
+                        widget.product.title ?? '',
                         maxLines: 1,
                         style: TextStyle(
                             overflow: TextOverflow.ellipsis,
@@ -67,9 +77,10 @@ class ProductCard extends StatelessWidget {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                         children: [
                           Text(
-                            '\$ ${product.price ?? 0}',
+                            '\$ ${widget.product.price ?? 0}',
                             style: TextStyle(
                               color: AppColors.primaryColor,
                             ),
@@ -83,40 +94,54 @@ class ProductCard extends StatelessWidget {
                                 color: Colors.amber,
                               ),
                               Text(
-                                '${product.star ?? 0}',
+                                '${widget.product.star ?? 0}',
                                 style: TextStyle(
                                   color: Colors.blueGrey.shade500,
                                 ),
                               ),
+                              GetBuilder<WishListController>(
+                                builder: (wishListController) {
+                                  return InkWell(
+                                    onTap: () async {
+                                      final result = await wishListController
+                                          .addToWishList(widget.product.id!);
+                                      if (result) {
+                                        Get.snackbar('Successful',
+                                            'This product has been added to wish list');
+                                      } else {
+                                        Get.snackbar('Failed',
+                                            "This product couldn't be added to wish list",
+                                            colorText: Colors.red);
+                                      }
+                                      if (result) {}
+                                    },
+                                    child: SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: IconButton(
+                                          iconSize: 16,
+                                          onPressed: () {
+                                            _isTap = !_isTap;
+                                            setState(() {});
+                                          },
+                                          style: IconButton.styleFrom(),
+                                          icon: Icon(
+                                            Icons.favorite_outline,
+                                            color: _isTap
+                                                ? Colors.red
+                                                : Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              )
                             ],
                           ),
-                          GetBuilder<WishListController>(
-                              builder: (wishListController) {
-                            return InkWell(
-                              onTap: () async{
-                                final result = await wishListController.addToWishList(product.id!);
-                                if (result) {
-                                  Get.snackbar(
-                                      'Successful', 'This product has been added to wish list');
-                                } else {
-                                  Get.snackbar(
-                                      'Failed', "This product couldn't be added to wish list",
-                                      colorText: Colors.red);
-                                }
-                              },
-                              child: Card(
-                                color: AppColors.primaryColor,
-                                child: const Padding(
-                                  padding: EdgeInsets.all(2),
-                                  child: Icon(
-                                    Icons.favorite_outline,
-                                    size: 12,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },)
+
                         ],
                       ),
                     ],
