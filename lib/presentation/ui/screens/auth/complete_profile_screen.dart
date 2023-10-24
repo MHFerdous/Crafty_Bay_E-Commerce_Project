@@ -1,8 +1,9 @@
-import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
+import 'package:crafty_bay/presentation/state_holders/create_profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../utility/image_assets.dart';
+import '../home_screen.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({Key? key}) : super(key: key);
@@ -12,16 +13,54 @@ class CompleteProfileScreen extends StatefulWidget {
 }
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
-  final TextEditingController _firstNameTEController = TextEditingController();
-  final TextEditingController _lastNameTEController = TextEditingController();
+  final TextEditingController _fullNameTEController = TextEditingController();
   final TextEditingController _phoneNumberTEController =
       TextEditingController();
+  final TextEditingController _countryTEController = TextEditingController();
   final TextEditingController _cityTEController = TextEditingController();
+  final TextEditingController _faxTEController = TextEditingController();
+  final TextEditingController _postCodeTEController = TextEditingController();
   final TextEditingController _shippingAddressTEController =
       TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final bool _completeProfileInProgress = false;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<CreateProfileController>().readProfile();
+    });
+    _fullNameTEController.text =
+        CreateProfileController().readProfileModel.data?.cusName ?? '';
+    _shippingAddressTEController.text =
+        CreateProfileController().readProfileModel.data?.cusAdd ?? '';
+    _cityTEController.text =
+        CreateProfileController().readProfileModel.data?.cusCity ?? '';
+    _cityTEController.text =
+        CreateProfileController().readProfileModel.data?.cusState ?? '';
+    _postCodeTEController.text =
+        CreateProfileController().readProfileModel.data?.cusPostcode ?? '';
+    _countryTEController.text =
+        CreateProfileController().readProfileModel.data?.cusCountry ?? '';
+    _phoneNumberTEController.text =
+        CreateProfileController().readProfileModel.data?.cusPhone ?? '';
+    _faxTEController.text =
+        CreateProfileController().readProfileModel.data?.cusFax ?? '';
+    _fullNameTEController.text =
+        CreateProfileController().readProfileModel.data?.shipName ?? '';
+    _shippingAddressTEController.text =
+        CreateProfileController().readProfileModel.data?.shipAdd ?? '';
+    _cityTEController.text =
+        CreateProfileController().readProfileModel.data?.shipCity ?? '';
+    _cityTEController.text =
+        CreateProfileController().readProfileModel.data?.shipState ?? '';
+    _postCodeTEController.text =
+        CreateProfileController().readProfileModel.data?.shipPostcode ?? '';
+    _countryTEController.text =
+        CreateProfileController().readProfileModel.data?.shipCountry ?? '';
+    _phoneNumberTEController.text =
+        CreateProfileController().readProfileModel.data?.shipPhone ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +73,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               key: _formKey,
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Center(
                     child: SvgPicture.asset(
                       ImageAssets.craftyBayLogoSVG,
@@ -64,7 +106,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     height: 36,
                   ),
                   TextFormField(
-                    controller: _firstNameTEController,
+                    controller: _fullNameTEController,
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
@@ -73,31 +115,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                           EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                     ),
                     validator: (String? value) {
-                      if ((value?.isEmpty ?? true) || value!.length < 3) {
-                        return 'Enter your first name';
+                      if ((value?.isEmpty ?? true) || value!.length < 5) {
+                        return 'Enter your full name';
                       }
                       return null;
                     },
                   ),
-                  /*const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: _lastNameTEController,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      hintText: 'Last Name',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    ),
-                    validator: (String? value) {
-                      if ((value?.isEmpty ?? true) || value!.length < 3) {
-                        return 'Enter your last name';
-                      }
-                      return null;
-                    },
-                  ),*/
                   const SizedBox(
                     height: 16,
                   ),
@@ -129,13 +152,35 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       SizedBox(
                         width: 180,
                         child: TextFormField(
-                          controller: _cityTEController,
+                          controller: _countryTEController,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
                             hintText: 'Country',
-                            contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                          ),
+                          validator: (String? value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Enter your country name';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      SizedBox(
+                        width: 180,
+                        child: TextFormField(
+                          controller: _cityTEController,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            hintText: 'City',
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
                           ),
                           validator: (String? value) {
                             if (value?.isEmpty ?? true) {
@@ -145,21 +190,49 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                           },
                         ),
                       ),
-                      SizedBox(width: 16,),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
                       SizedBox(
-                        width: 180,
+                        width: 210,
                         child: TextFormField(
-                          controller: _cityTEController,
+                          controller: _faxTEController,
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
-                            hintText: 'City',
-                            contentPadding:
-                                EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                            hintText: 'Fax',
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
                           ),
                           validator: (String? value) {
                             if (value?.isEmpty ?? true) {
-                              return 'Enter your city';
+                              return 'Enter your fax number';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      SizedBox(
+                        width: 150,
+                        child: TextFormField(
+                          controller: _postCodeTEController,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            hintText: 'PostCode',
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                          ),
+                          validator: (String? value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Enter your postCode';
                             }
                             return null;
                           },
@@ -191,21 +264,44 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: Visibility(
-                      visible: _completeProfileInProgress == false,
-                      replacement: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            Get.to(
+                    child: GetBuilder<CreateProfileController>(
+                      builder: (createProfileController) {
+                        if (createProfileController.createProfileInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              final result =
+                                  await createProfileController.completeProfile(
+                                _fullNameTEController.text.trim(),
+                                _shippingAddressTEController.text.trim(),
+                                _cityTEController.text.trim(),
+                                _cityTEController.text.trim(),
+                                _postCodeTEController.text.trim(),
+                                _countryTEController.text.trim(),
+                                _phoneNumberTEController.text.trim(),
+                                _faxTEController.text.trim(),
+                              );
+                              if (result) {
+                                Get.snackbar(
+                                    'Successful!', 'Profile has been created');
+
+                                Get.to(
                                   () => const HomeScreen(),
-                            );
-                          }
-                        },
-                        child: const Text('Complete'),
-                      ),
+                                );
+                              } else {
+                                Get.snackbar(
+                                    'Failed!', "Profile couldn't be created",
+                                    colorText: Colors.red);
+                              }
+                            }
+                          },
+                          child: const Text('Complete'),
+                        );
+                      },
                     ),
                   ),
                 ],
