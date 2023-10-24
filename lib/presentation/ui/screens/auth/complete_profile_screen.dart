@@ -22,6 +22,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final TextEditingController _postCodeTEController = TextEditingController();
   final TextEditingController _shippingAddressTEController =
       TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override

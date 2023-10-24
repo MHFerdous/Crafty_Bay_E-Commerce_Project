@@ -1,6 +1,7 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -130,9 +131,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ],
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(
+                    () => ReviewListScreen(
+                      productId: productDetails.productId!,
+                    ),
+                  );
+                },
                 child: Text(
-                  'Review',
+                  'Reviews',
                   style: TextStyle(
                       fontSize: 16,
                       color: AppColors.primaryColor,
