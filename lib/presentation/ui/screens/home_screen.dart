@@ -1,7 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
-import 'package:crafty_bay/presentation/ui/screens/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,7 @@ import '../widgets/circular_icon_button.dart';
 import '../widgets/home/home_slider.dart';
 import '../widgets/home/section_header.dart';
 import '../widgets/product_card.dart';
+import 'auth/complete_profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -56,9 +56,12 @@ class _ProductCardState extends State<ProductCard> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: AppColors.primaryColor.withOpacity(0.1),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
                 ),
-                color: AppColors.primaryColor.withOpacity(0.1),
                 child: Padding(
                   padding: const EdgeInsets.all(4),
                   child: Column(
@@ -77,7 +80,6 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                         children: [
                           Text(
                             '\$ ${widget.product.price ?? 0}',
@@ -106,6 +108,7 @@ class _ProductCardState extends State<ProductCard> {
                                       final result = await wishListController
                                           .addToWishList(widget.product.id!);
                                       if (result) {
+                                        _isTap = true;
                                         Get.snackbar('Successful',
                                             'This product has been added to wish list');
                                       } else {
@@ -141,7 +144,6 @@ class _ProductCardState extends State<ProductCard> {
                               )
                             ],
                           ),
-
                         ],
                       ),
                     ],

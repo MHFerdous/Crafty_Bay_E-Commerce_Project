@@ -2,7 +2,6 @@ import 'package:crafty_bay/presentation/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../../utility/image_assets.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -69,7 +68,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     textInputAction: TextInputAction.next,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
-                      hintText: 'First Name',
+                      hintText: 'Full Name',
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                     ),
@@ -80,7 +79,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(
+                  /*const SizedBox(
                     height: 16,
                   ),
                   TextFormField(
@@ -98,7 +97,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       }
                       return null;
                     },
-                  ),
+                  ),*/
                   const SizedBox(
                     height: 16,
                   ),
@@ -123,22 +122,50 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   const SizedBox(
                     height: 16,
+                    width: 50,
                   ),
-                  TextFormField(
-                    controller: _cityTEController,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      hintText: 'City',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                    ),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Enter your city';
-                      }
-                      return null;
-                    },
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 180,
+                        child: TextFormField(
+                          controller: _cityTEController,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            hintText: 'Country',
+                            contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          ),
+                          validator: (String? value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Enter your city';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 16,),
+                      SizedBox(
+                        width: 180,
+                        child: TextFormField(
+                          controller: _cityTEController,
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.text,
+                          decoration: const InputDecoration(
+                            hintText: 'City',
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          ),
+                          validator: (String? value) {
+                            if (value?.isEmpty ?? true) {
+                              return 'Enter your city';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 16,

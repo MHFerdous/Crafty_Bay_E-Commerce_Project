@@ -1,5 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../utility/app_colors.dart';
@@ -18,7 +19,7 @@ class _CartScreenState extends State<CartScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        Get.find<CartListController>().cartListModel;
+        Get.find<CartListController>().getCartList();
       },
     );
   }
@@ -107,7 +108,17 @@ class _CartScreenState extends State<CartScreen> {
                       SizedBox(
                         width: 120,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (Get.find<CartListController>()
+                                    .cartListModel
+                                    .data
+                                    ?.isNotEmpty ??
+                                false) {
+                              Get.to(
+                                () => const CheckOutScreen(),
+                              );
+                            }
+                          },
                           child: const Text('Checkout'),
                         ),
                       )

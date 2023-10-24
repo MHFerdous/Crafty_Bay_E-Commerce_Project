@@ -22,7 +22,7 @@ class CreateInvoiceController extends GetxController {
         await NetworkCaller.getRequest(Urls.createInvoice);
     _invoiceInProgress = false;
     update();
-    if (response.isSuccess) {
+    if (response.isSuccess && response.responseJson!['msg'] == 'success') {
       _invoiceCreateResponseModel =
           InvoiceCreateResponseModel.fromJson(response.responseJson!);
       return true;
