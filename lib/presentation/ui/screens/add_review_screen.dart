@@ -82,40 +82,21 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
               SizedBox(
                 width: double.infinity,
                 child: GetBuilder<ReviewController>(
-                    builder: (addReviewController) {
-                  if (addReviewController.reviewInProgress) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                  builder: (addReviewController) {
+                    return ElevatedButton(
+                      onPressed: () async {
+                        print(widget.productId);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text('Submit'),
                     );
                   }
-                  return ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        final result = await addReviewController.addReview(
-                          _descriptionTEController.text.trim(),
-                          widget.productId,
-                          _ratingTEController.text.trim(),
-                        );
-                        if (result) {
-                          Get.snackbar(
-                              'Successful!', 'review has been created');
-
-                          Get.back();
-                        } else {
-                          Get.snackbar('Failed!', "Review couldn't be created",
-                              colorText: Colors.red);
-                        }
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text('Submit'),
-                  );
-                }),
-              )
+                ),
+              ),
             ],
           ),
         ),

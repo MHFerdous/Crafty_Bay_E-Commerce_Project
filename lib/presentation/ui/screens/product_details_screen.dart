@@ -132,9 +132,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               TextButton(
                 onPressed: () {
+                  print(widget.productId);
                   Get.to(
                     () => ReviewListScreen(
-                      productId: productDetails.productId!,
+                      productId: widget.productId,
                     ),
                   );
                 },

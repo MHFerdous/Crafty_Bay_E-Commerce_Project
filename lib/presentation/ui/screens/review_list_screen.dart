@@ -2,6 +2,7 @@ import 'package:crafty_bay/presentation/state_holders/review_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/add_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../state_holders/review_list_controller.dart';
 import '../utility/app_colors.dart';
 
 class ReviewListScreen extends StatefulWidget {
@@ -35,7 +36,38 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
-                return reviewCard;
+                return
+                   Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Card(
+                      color: Colors.grey.shade100,
+                      elevation: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GetBuilder<ReviewListController>(builder: (reviewListController) {
+                          if (reviewListController.reviewInProgress) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return Column(
+                            children: [
+                              ListView.builder(
+                                  itemCount: reviewListController.reviewListModel.data?.length ?? 0,
+                                  itemBuilder: (context, index) {
+                                    return ListTile(
+                                      leading: Icon(Icons.person_outline),
+                                      title: Text(reviewListController.data.description ??
+                                          ''),
+                                    );
+                                  })
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
+                  );
+
               },
             ),
           ),
@@ -71,8 +103,11 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
             backgroundColor: AppColors.primaryColor,
             child: IconButton(
               onPressed: () {
-                Get.to(
-                  () =>  AddReviewScreen(productId: widget.productId,),
+                print(widget.productId)
+;                Get.to(
+                  () => AddReviewScreen(
+                    productId: widget.productId,
+                  ),
                 );
               },
               icon: const Icon(
@@ -86,7 +121,7 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
     );
   }
 
-  Padding get reviewCard {
+/*  Padding get reviewCard {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -108,7 +143,9 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
                     itemBuilder: (context, index) {
                       return ListTile(
                         leading: Icon(Icons.person_outline),
-                       // title: Text(reviewListController.reviewListModel.data![index]!.description),
+                        title: Text(reviewListController
+                                .reviewListModel.data?[index].description ??
+                            ''),
                       );
                     })
               ],
@@ -117,5 +154,5 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
         ),
       ),
     );
-  }
+  }*/
 }

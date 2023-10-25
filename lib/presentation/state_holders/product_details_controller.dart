@@ -15,13 +15,9 @@ class ProductDetailsController extends GetxController {
   List<String> _availableSizes = [];
 
   bool get getProductDetailsInProgress => _getProductDetailsInProgress;
-
   ProductDetails get productDetails => _productDetails;
-
   List<String> get availableColors => _availableColors;
-
   List<String> get availableSizes => _availableSizes;
-
   String get errorMessage => _errorMessage;
 
   Future<bool> getProductDetails(int id) async {
