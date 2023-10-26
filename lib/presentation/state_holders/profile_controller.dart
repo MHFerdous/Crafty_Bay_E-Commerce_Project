@@ -4,14 +4,14 @@ import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../data/utility/urls.dart';
 
-class CreateProfileController extends GetxController {
+class ProfileController extends GetxController {
   bool _profileInProgress = false;
   String _message = '';
-  ReadProfileModel _readProfileModel = ReadProfileModel();
+  ProfileData _profileData = ProfileData();
 
-  bool get createProfileInProgress => _profileInProgress;
+  bool get profileInProgress => _profileInProgress;
   String get message => _message;
-  ReadProfileModel get readProfileModel => _readProfileModel;
+  ProfileData get profileData => _profileData;
 
   Future<bool> completeProfile(
     String name,
@@ -62,8 +62,7 @@ class CreateProfileController extends GetxController {
     );
     _profileInProgress = false;
     if (response.isSuccess) {
-      _readProfileModel =
-          ReadProfileModel.fromJson(response.responseJson ?? {});
+      _profileData = ReadProfileModel.fromJson(response.responseJson!).data!;
       update();
       return true;
     } else {

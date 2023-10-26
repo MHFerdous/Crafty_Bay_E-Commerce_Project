@@ -1,18 +1,18 @@
-import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../utility/image_assets.dart';
-import '../home_screen.dart';
+import '../../../state_holders/profile_controller.dart';
 
-class CompleteProfileScreen extends StatefulWidget {
-  const CompleteProfileScreen({Key? key}) : super(key: key);
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<CompleteProfileScreen> createState() => _CompleteProfileScreenState();
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
 }
 
-class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final TextEditingController _fullNameTEController = TextEditingController();
   final TextEditingController _phoneNumberTEController =
       TextEditingController();
@@ -22,48 +22,63 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final TextEditingController _postCodeTEController = TextEditingController();
   final TextEditingController _shippingAddressTEController =
       TextEditingController();
+  final TextEditingController _emailTEController = TextEditingController();
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProfileController>().readProfile();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+          color: Colors.black,
+        ),
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GetBuilder<ProfileController>(
+            builder: (updateProfileController) {
+              _fullNameTEController.text =
+                  updateProfileController.profileData.cusName ?? '';
+              _shippingAddressTEController.text =
+                  updateProfileController.profileData.cusAdd ?? '';
+              _cityTEController.text =
+                  updateProfileController.profileData.cusCity ?? '';
+              _postCodeTEController.text =
+                  updateProfileController.profileData.cusPostcode ?? '';
+              _countryTEController.text =
+                  updateProfileController.profileData.cusCountry ?? '';
+              _phoneNumberTEController.text =
+                  updateProfileController.profileData.cusPhone ?? '';
+              _emailTEController.text =
+                  updateProfileController.profileData.user?.email ?? '';
+              _faxTEController.text =
+                  updateProfileController.profileData.cusFax ?? '';
+
+              return Column(
                 children: [
                   const SizedBox(
-                    height: 20,
-                  ),
-                  Center(
-                    child: SvgPicture.asset(
-                      ImageAssets.craftyBayLogoSVG,
-                      width: 100,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
+                    height: 80,
                   ),
                   Text(
-                    'Complete Profile',
+                    'Update Profile',
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
                         ?.copyWith(fontSize: 32),
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Get started with us with your details',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: Colors.grey),
                   ),
                   const SizedBox(
                     height: 36,
@@ -236,40 +251,40 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         }
                         return ElevatedButton(
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final result =
-                                  await createProfileController.completeProfile(
-                                _fullNameTEController.text.trim(),
-                                _shippingAddressTEController.text.trim(),
-                                _cityTEController.text.trim(),
-                                _cityTEController.text.trim(),
-                                _postCodeTEController.text.trim(),
-                                _countryTEController.text.trim(),
-                                _phoneNumberTEController.text.trim(),
-                                _faxTEController.text.trim(),
-                              );
-                              if (result) {
-                                Get.snackbar(
-                                    'Successful!', 'Profile has been created');
+                            final result =
+                                await createProfileController.completeProfile(
+                              _fullNameTEController.text.trim(),
+                              _shippingAddressTEController.text.trim(),
+                              _cityTEController.text.trim(),
+                              _cityTEController.text.trim(),
+                              _postCodeTEController.text.trim(),
+                              _countryTEController.text.trim(),
+                              _phoneNumberTEController.text.trim(),
+                              _faxTEController.text.trim(),
+                            );
+                            if (result) {
+                              Get.snackbar(
+                                  'Successful!', 'Profile has been created');
 
-                                Get.to(
-                                  () => const HomeScreen(),
-                                );
-                              } else {
-                                Get.snackbar(
-                                    'Failed!', "Profile couldn't be created",
-                                    colorText: Colors.red);
-                              }
+                              Get.offAll(
+                                () => const MainBottomNavScreen(),
+                              );
+                            } else {
+                              Get.snackbar(
+                                  'Failed!', "Profile couldn't be created",
+                                  colorText: Colors.red);
                             }
                           },
-                          child: const Text('Complete'),
+                          child: const Text(
+                            'Update Profile',
+                          ),
                         );
                       },
                     ),
-                  ),
+                  )
                 ],
-              ),
-            ),
+              );
+            },
           ),
         ),
       ),

@@ -1,12 +1,12 @@
 class ReadProfileModel {
   String? msg;
-  Data? data;
+  ProfileData? data;
 
   ReadProfileModel({this.msg, this.data});
 
   ReadProfileModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? ProfileData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,7 +19,7 @@ class ReadProfileModel {
   }
 }
 
-class Data {
+class ProfileData {
   int? id;
   String? cusName;
   String? cusAdd;
@@ -41,7 +41,7 @@ class Data {
   String? updatedAt;
   User? user;
 
-  Data(
+  ProfileData(
       {this.id,
       this.cusName,
       this.cusAdd,
@@ -63,7 +63,7 @@ class Data {
       this.updatedAt,
       this.user});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  ProfileData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     cusName = json['cus_name'];
     cusAdd = json['cus_add'];
