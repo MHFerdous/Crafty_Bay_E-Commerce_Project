@@ -1,9 +1,12 @@
+import 'dart:math';
+
+import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../utility/image_assets.dart';
-import '../home_screen.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({Key? key}) : super(key: key);
@@ -24,6 +27,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  static final _random = Random();
+  static var profileToken = _random.nextInt(6);
 
   @override
   Widget build(BuildContext context) {
@@ -251,9 +257,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                               if (result) {
                                 Get.snackbar(
                                     'Successful!', 'Profile has been created');
+                                AuthController.setUpdateProfile(
+                                  profileToken.toString(),
+                                );
 
-                                Get.to(
-                                  () => const HomeScreen(),
+                                Get.offAll(
+                                  () => const MainBottomNavScreen(),
                                 );
                               } else {
                                 Get.snackbar(

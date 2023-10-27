@@ -52,21 +52,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           child: GetBuilder<ProfileController>(
             builder: (updateProfileController) {
               _fullNameTEController.text =
-                  updateProfileController.profileData.cusName ?? '';
+                  updateProfileController.readProfileData.cusName ?? '';
               _shippingAddressTEController.text =
-                  updateProfileController.profileData.cusAdd ?? '';
+                  updateProfileController.readProfileData.cusAdd ?? '';
               _cityTEController.text =
-                  updateProfileController.profileData.cusCity ?? '';
+                  updateProfileController.readProfileData.cusCity ?? '';
               _postCodeTEController.text =
-                  updateProfileController.profileData.cusPostcode ?? '';
+                  updateProfileController.readProfileData.cusPostcode ?? '';
               _countryTEController.text =
-                  updateProfileController.profileData.cusCountry ?? '';
+                  updateProfileController.readProfileData.cusCountry ?? '';
               _phoneNumberTEController.text =
-                  updateProfileController.profileData.cusPhone ?? '';
+                  updateProfileController.readProfileData.cusPhone ?? '';
               _emailTEController.text =
-                  updateProfileController.profileData.user?.email ?? '';
+                  updateProfileController.readProfileData.user?.email ?? '';
               _faxTEController.text =
-                  updateProfileController.profileData.cusFax ?? '';
+                  updateProfileController.readProfileData.cusFax ?? '';
 
               return Column(
                 children: [

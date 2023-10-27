@@ -55,7 +55,38 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.call_outlined,
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text('Contact for help:'),
+                        ],
+                      ),
+                      content: const Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '01XXXXXXXXX',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          Text(
+                            '01XXXXXXXXX',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    );
+                  },
+                );
+              },
             ),
             const SizedBox(
               width: 8,

@@ -1,3 +1,4 @@
+import 'package:crafty_bay/data/models/create_profile_model.dart';
 import 'package:crafty_bay/data/models/network_response.dart';
 import 'package:crafty_bay/data/models/read_profile_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
@@ -7,11 +8,12 @@ import '../../data/utility/urls.dart';
 class ProfileController extends GetxController {
   bool _profileInProgress = false;
   String _message = '';
-  ProfileData _profileData = ProfileData();
-
+  CompleteProfileData _completeProfileData = CompleteProfileData();
+  ReadProfileData _readProfileData = ReadProfileData();
   bool get profileInProgress => _profileInProgress;
   String get message => _message;
-  ProfileData get profileData => _profileData;
+  CompleteProfileData get completeProfileData => _completeProfileData;
+  ReadProfileData get readProfileData => _readProfileData;
 
   Future<bool> completeProfile(
     String name,
@@ -47,6 +49,8 @@ class ProfileController extends GetxController {
     );
     _profileInProgress = false;
     if (response.isSuccess) {
+      _completeProfileData =
+          CreateProfileModel.fromJson(response.responseJson ?? {}).data!;
       return true;
     } else {
       _message = 'Failed to create profile';
@@ -62,7 +66,7 @@ class ProfileController extends GetxController {
     );
     _profileInProgress = false;
     if (response.isSuccess) {
-      _profileData = ReadProfileModel.fromJson(response.responseJson!).data!;
+      _readProfileData = ReadProfileModel.fromJson(response.responseJson!).data!;
       update();
       return true;
     } else {
