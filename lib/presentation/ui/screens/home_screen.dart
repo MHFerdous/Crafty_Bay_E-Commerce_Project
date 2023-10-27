@@ -106,6 +106,67 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
+            const SizedBox(
+              width: 8,
+            ),
+            CircularIconButton(
+              icon: Icons.logout_outlined,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text('Logging Out...'),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.close),
+                          ),
+                        ],
+                      ),
+                      content: const Text(
+                        'Are you sure?',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      actions: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'Yes',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: const Text(
+                                'No',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
           ],
         ),
       ),

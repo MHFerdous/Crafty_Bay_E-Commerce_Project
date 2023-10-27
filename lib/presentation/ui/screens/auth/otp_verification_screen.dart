@@ -27,32 +27,32 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   bool isButtonDisabled = true;
 
   void startTimer() {
-    if (mounted) {
-      const onSec = Duration(seconds: 1);
-      timer = Timer.periodic(
-        onSec,
-        (timer) {
-          if (start == 0) {
-            setState(() {
-              timer.cancel();
-            });
-          } else {
+    const onSec = Duration(seconds: 1);
+    timer = Timer.periodic(
+      onSec,
+      (timer) {
+        if (start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          if (mounted) {
             setState(() {
               start--;
             });
           }
-        },
-      );
-    }
+        }
+      },
+    );
   }
 
   @override
   void initState() {
+    super.initState();
     startTimer();
     Timer(const Duration(seconds: 120), () {
       isButtonDisabled = false;
     });
-    super.initState();
   }
 
   @override
@@ -232,11 +232,5 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       Get.snackbar('Failed', emailVerificationController.message,
           backgroundColor: Colors.red);
     }
-  }
-
-  @override
-  void dispose() {
-    startTimer();
-    super.dispose();
   }
 }

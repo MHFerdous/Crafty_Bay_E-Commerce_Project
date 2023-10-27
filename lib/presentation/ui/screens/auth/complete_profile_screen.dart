@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
@@ -27,8 +25,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-   static int profileToken = 101;
 
   @override
   Widget build(BuildContext context) {
@@ -234,14 +230,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     width: double.infinity,
                     child: GetBuilder<ProfileController>(
                       builder: (createProfileController) {
-                       /* if (createProfileController.profileInProgress) {
+                        if (createProfileController.profileInProgress) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
-                        }*/
+                        }
                         return ElevatedButton(
                           onPressed: () async {
-                            if (!_formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               final result =
                                   await createProfileController.completeProfile(
                                 _fullNameTEController.text.trim(),
@@ -255,16 +251,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                               );
                               if (result) {
                                 print(_faxTEController.text);
-                                /*AuthController.setUpdateProfile(
-                                  profileToken.toString(),
+                                AuthController.setUpdateProfile(
+                                  _faxTEController.text,
+                                );
+                                Get.offAll(
+                                  () => const MainBottomNavScreen(),
                                 );
                                 Get.snackbar(
                                     'Successful!', 'Profile has been created');
-
-
-                                Get.offAll(
-                                  () => const MainBottomNavScreen(),
-                                );*/
                               } else {
                                 Get.snackbar(
                                     'Failed!', "Profile couldn't be created",

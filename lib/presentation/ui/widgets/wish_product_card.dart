@@ -127,7 +127,9 @@ class _WishProductCardState extends State<WishProductCard> {
             children: [
               const Text('Deleting...'),
               IconButton(
-                onPressed: (Get.back),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 icon: const Icon(Icons.close),
               ),
             ],
