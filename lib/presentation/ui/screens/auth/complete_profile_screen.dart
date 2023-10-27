@@ -255,11 +255,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-                                Get.snackbar(
-                                    'Successful!', 'Profile has been created');
                                 AuthController.setUpdateProfile(
                                   profileToken.toString(),
                                 );
+                                Get.snackbar(
+                                    'Successful!', 'Profile has been created');
+
 
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
