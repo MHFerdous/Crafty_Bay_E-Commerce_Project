@@ -1,5 +1,7 @@
+import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -114,9 +116,15 @@ class _CartScreenState extends State<CartScreen> {
                                     .data
                                     ?.isNotEmpty ??
                                 false) {
-                              Get.to(
-                                () => const CheckOutScreen(),
-                              );
+                              if (AuthController.updateProfile != null) {
+                                Get.to(
+                                  () => const CheckOutScreen(),
+                                );
+                              } else {
+                                Get.to(
+                                  () => const CompleteProfileScreen(),
+                                );
+                              }
                             }
                           },
                           child: const Text('Checkout'),
