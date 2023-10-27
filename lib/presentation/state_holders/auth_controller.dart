@@ -2,8 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   static String? _accessToken;
+  static String? _updateProfile;
 
   static String? get accessToken => _accessToken;
+  static String? get updateProfile => _updateProfile;
 
   static Future<void> setAccessToken(String token) async {
     final SharedPreferences sharedPreferences =
@@ -12,10 +14,23 @@ class AuthController {
     _accessToken = token;
   }
 
+  static Future<void> setUpdateProfile(String profile) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    await sharedPreferences.setString('update_profile', profile);
+    _updateProfile = profile;
+  }
+
   static Future<void> getAccessToken() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     _accessToken = sharedPreferences.getString('access_token');
+  }
+
+  static Future<void> getUpdateProfile() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    _updateProfile = sharedPreferences.getString('update_profile');
   }
 
   static Future<void> saveProfileDetails(String data) async {
