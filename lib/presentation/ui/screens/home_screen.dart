@@ -40,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icons.person_2_outlined,
               onTap: () {
                 if (AuthController.updateProfile != null) {
-                  Get.to(() => const UpdateProfileScreen());
+                  Get.to(
+                    () => const UpdateProfileScreen(),
+                  );
                 } else {
                   Get.to(
                     () => const CompleteProfileScreen(),

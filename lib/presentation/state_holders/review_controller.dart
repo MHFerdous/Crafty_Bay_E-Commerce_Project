@@ -7,13 +7,13 @@ import '../../data/utility/urls.dart';
 class ReviewController extends GetxController {
   bool _reviewInProgress = false;
   String _message = '';
-  /*ReviewListModel _reviewListModel = ReviewListModel();
-  Data _data = Data();*/
+  ReviewListModel _reviewListModel = ReviewListModel();
+  Data _data = Data();
 
   bool get reviewInProgress => _reviewInProgress;
   String get message => _message;
-  /*ReviewListModel get reviewListModel => _reviewListModel;
-  Data get data => _data;*/
+  ReviewListModel get reviewListModel => _reviewListModel;
+  Data get data => _data;
 
   Future<bool> addReview(
       String description, int productId, String rating) async {
@@ -24,12 +24,13 @@ class ReviewController extends GetxController {
       {
         "description": description,
         "product_id": productId,
-        "rating": rating,
+        "rating": int.tryParse(rating),
       },
     );
     _reviewInProgress = false;
     update();
     if (response.isSuccess) {
+      _reviewListModel = ReviewListModel.fromJson(response.responseJson!);
       update();
       return true;
     } else {

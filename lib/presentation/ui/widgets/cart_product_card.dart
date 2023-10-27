@@ -23,7 +23,8 @@ class _CartProductCardState extends State<CartProductCard> {
     return InkWell(
       onTap: () {
         Get.to(
-          () => ProductDetailsScreen(productId: widget.cartData.product!.id!),
+          () =>
+              ProductDetailsScreen(productId: widget.cartData.product?.id ?? 0),
         );
       },
       child: Card(
