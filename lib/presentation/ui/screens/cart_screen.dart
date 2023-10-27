@@ -19,9 +19,20 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
+    print(AuthController.updateProfile);
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        Get.find<CartListController>().getCartList();
+        if (AuthController.updateProfile == null) {
+          Get.to(
+            () => const CompleteProfileScreen(),
+          )?.then(
+            (value) {
+              Get.find<CartListController>().getCartList();
+            },
+          );
+        } else {
+          Get.find<CartListController>().getCartList();
+        }
       },
     );
   }
@@ -116,15 +127,9 @@ class _CartScreenState extends State<CartScreen> {
                                     .data
                                     ?.isNotEmpty ??
                                 false) {
-                              if (AuthController.updateProfile != null) {
-                                Get.to(
-                                  () => const CheckOutScreen(),
-                                );
-                              } else {
-                                Get.to(
-                                  () => const CompleteProfileScreen(),
-                                );
-                              }
+                              Get.to(
+                                () => const CheckOutScreen(),
+                              );
                             }
                           },
                           child: const Text('Checkout'),

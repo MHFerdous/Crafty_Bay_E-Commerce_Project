@@ -28,8 +28,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  static final _random = Random();
-  static var profileToken = _random.nextInt(6);
+   static int profileToken = 101;
 
   @override
   Widget build(BuildContext context) {
@@ -235,14 +234,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                     width: double.infinity,
                     child: GetBuilder<ProfileController>(
                       builder: (createProfileController) {
-                        if (createProfileController.profileInProgress) {
+                       /* if (createProfileController.profileInProgress) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
-                        }
+                        }*/
                         return ElevatedButton(
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if (!_formKey.currentState!.validate()) {
                               final result =
                                   await createProfileController.completeProfile(
                                 _fullNameTEController.text.trim(),
@@ -255,7 +254,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-                                AuthController.setUpdateProfile(
+                                print(_faxTEController.text);
+                                /*AuthController.setUpdateProfile(
                                   profileToken.toString(),
                                 );
                                 Get.snackbar(
@@ -264,7 +264,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
 
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
-                                );
+                                );*/
                               } else {
                                 Get.snackbar(
                                     'Failed!', "Profile couldn't be created",
