@@ -12,7 +12,13 @@ class WishListScreen extends StatefulWidget {
 }
 
 class _WishListScreenState extends State<WishListScreen> {
-
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<WishListController>().showWishList();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +45,37 @@ class _WishListScreenState extends State<WishListScreen> {
           },
           child: GetBuilder<WishListController>(
             builder: (showWishListController) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount:
-                          showWishListController.showWishListModel.data?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return WishProductCard(
-                          showWishListData:
-                              showWishListController.showWishListModel.data![index],
-                        );
-                      },
-                    ),
+              if (showWishListController.wishListInProgress) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (showWishListController.showWishListModel.data!.isEmpty) {
+                return const Center(
+                  child: Text(
+                    'Nothing to show',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
-                ],
-              );
+                );
+              } else {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: showWishListController
+                                .showWishListModel.data?.length ??
+                            0,
+                        itemBuilder: (context, index) {
+                          return WishProductCard(
+                            showWishListData: showWishListController
+                                .showWishListModel.data![index],
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
             },
           ),
         ),
@@ -62,4 +83,3 @@ class _WishListScreenState extends State<WishListScreen> {
     );
   }
 }
-

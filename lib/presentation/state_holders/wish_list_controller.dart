@@ -11,7 +11,7 @@ class WishListController extends GetxController {
   CreateWishListModel _addToWishListModel = CreateWishListModel();
   ShowWishListModel _wishListModel = ShowWishListModel();
 
-  bool get getWishListInProgress => _wishListInProgress;
+  bool get wishListInProgress => _wishListInProgress;
   String get message => _message;
   CreateWishListModel get createWishListModel => _addToWishListModel;
   ShowWishListModel get showWishListModel => _wishListModel;

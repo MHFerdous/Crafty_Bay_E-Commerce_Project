@@ -63,8 +63,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
               if (productListController.productModel.data?.isEmpty ?? true) {
                 return const Center(
                   child: Text(
-                    'Empty List',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+                    'Nothing to show',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 );
               }
