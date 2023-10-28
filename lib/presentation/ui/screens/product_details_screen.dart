@@ -1,5 +1,6 @@
 import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
@@ -149,17 +150,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              Card(
-                color: AppColors.primaryColor,
-                child: const Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Icon(
-                    Icons.favorite_border_outlined,
-                    size: 16,
-                    color: Colors.white,
+              GetBuilder<WishListController>(builder: (createWishListController) {
+                return InkWell(
+                  onTap: () async {
+                    final result = await createWishListController
+                        .createWishList(widget.productId);
+                    if (result) {
+                      // _isTap = true;
+                      Get.snackbar('Successful',
+                          'This product has been added to wish list');
+                    } else {
+                      Get.snackbar('Failed',
+                          "This product couldn't be added to wish list",
+                          colorText: Colors.red);
+                    }
+                    if (result) {}
+                  },
+                  child: Card(
+                    color: AppColors.primaryColor,
+                    child: const Padding(
+                      padding: EdgeInsets.all(2.0),
+                      child: Icon(
+                        Icons.favorite_border_outlined,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
-                ),
-              )
+                );
+              })
             ],
           ),
           const SizedBox(

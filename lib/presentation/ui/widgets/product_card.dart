@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holders/add_to_wish_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +16,6 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  bool _isTap = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +40,7 @@ class _ProductCardState extends State<ProductCard> {
           child: Column(
             children: [
               Container(
-                height: 100,
+                height: 108,
                 decoration: BoxDecoration(
                   color: AppColors.primaryColor.withOpacity(0.1),
                   borderRadius: const BorderRadius.only(
@@ -101,48 +99,12 @@ class _ProductCardState extends State<ProductCard> {
                                   color: Colors.blueGrey.shade500,
                                 ),
                               ),
-                              GetBuilder<WishListController>(
-                                builder: (wishListController) {
-                                  return InkWell(
-                                    onTap: () async {
-                                      final result = await wishListController
-                                          .addToWishList(widget.product.id!);
-                                      if (result) {
-                                        _isTap = true;
-                                        Get.snackbar('Successful',
-                                            'This product has been added to wish list');
-                                      } else {
-                                        Get.snackbar('Failed',
-                                            "This product couldn't be added to wish list",
-                                            colorText: Colors.red);
-                                      }
-                                      if (result) {}
-                                    },
-                                    child: SizedBox(
-                                      height: 24,
-                                      width: 24,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(2),
-                                        child: IconButton(
-                                          iconSize: 16,
-                                          onPressed: () {
-                                            _isTap = !_isTap;
-                                            setState(() {});
-                                          },
-                                          style: IconButton.styleFrom(),
-                                          icon: Icon(
-                                            Icons.favorite_outline,
-                                            color: _isTap
-                                                ? Colors.red
-                                                : Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
                             ],
+                          ),
+                          Icon(
+                            Icons.favorite,
+                            size: 14,
+                            color: AppColors.primaryColor,
                           ),
                         ],
                       ),

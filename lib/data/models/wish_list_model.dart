@@ -1,10 +1,10 @@
-class WishListModel {
+class ShowWishListModel {
   String? msg;
   List<ShowWishListData>? data;
 
-  WishListModel({this.msg, this.data});
+  ShowWishListModel({this.msg, this.data});
 
-  WishListModel.fromJson(Map<String, dynamic> json) {
+  ShowWishListModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
       data = <ShowWishListData>[];

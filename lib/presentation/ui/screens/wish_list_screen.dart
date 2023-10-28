@@ -1,4 +1,4 @@
-import 'package:crafty_bay/presentation/state_holders/add_to_wish_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../state_holders/main_bottom_nav_controller.dart';
@@ -35,20 +35,20 @@ class _WishListScreenState extends State<WishListScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            Get.find<WishListController>().wishList();
+            Get.find<WishListController>().showWishList();
           },
           child: GetBuilder<WishListController>(
-            builder: (wishListController) {
+            builder: (showWishListController) {
               return Column(
                 children: [
                   Expanded(
                     child: ListView.builder(
                       itemCount:
-                          wishListController.wishListModel.data?.length ?? 0,
+                          showWishListController.showWishListModel.data?.length ?? 0,
                       itemBuilder: (context, index) {
                         return WishProductCard(
                           showWishListData:
-                              wishListController.wishListModel.data![index],
+                              showWishListController.showWishListModel.data![index],
                         );
                       },
                     ),

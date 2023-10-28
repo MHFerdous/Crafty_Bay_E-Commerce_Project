@@ -1,12 +1,12 @@
-class AddToWishListModel {
+class CreateWishListModel {
   String? msg;
-  WishListData? data;
+  CreateWishListData? data;
 
-  AddToWishListModel({this.msg, this.data});
+  CreateWishListModel({this.msg, this.data});
 
-  AddToWishListModel.fromJson(Map<String, dynamic> json) {
+  CreateWishListModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    data = json['data'] != null ? WishListData.fromJson(json['data']) : null;
+    data = json['data'] != null ? CreateWishListData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,16 +19,16 @@ class AddToWishListModel {
   }
 }
 
-class WishListData {
+class CreateWishListData {
   String? userId;
   String? productId;
   String? updatedAt;
   String? createdAt;
   int? id;
 
-  WishListData({this.userId, this.productId, this.updatedAt, this.createdAt, this.id});
+  CreateWishListData({this.userId, this.productId, this.updatedAt, this.createdAt, this.id});
 
-  WishListData.fromJson(Map<String, dynamic> json) {
+  CreateWishListData.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     productId = json['product_id'];
     updatedAt = json['updated_at'];

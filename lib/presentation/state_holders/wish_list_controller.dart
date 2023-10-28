@@ -6,26 +6,26 @@ import 'package:get/get.dart';
 import '../../data/utility/urls.dart';
 
 class WishListController extends GetxController {
-  bool _getWishListInProgress = false;
+  bool _wishListInProgress = false;
   String _message = '';
-  AddToWishListModel _addToWishListModel = AddToWishListModel();
-  WishListModel _wishListModel = WishListModel();
+  CreateWishListModel _addToWishListModel = CreateWishListModel();
+  ShowWishListModel _wishListModel = ShowWishListModel();
 
-  bool get getWishListInProgress => _getWishListInProgress;
+  bool get getWishListInProgress => _wishListInProgress;
   String get message => _message;
-  AddToWishListModel get addToWishListModel => _addToWishListModel;
-  WishListModel get wishListModel => _wishListModel;
+  CreateWishListModel get createWishListModel => _addToWishListModel;
+  ShowWishListModel get showWishListModel => _wishListModel;
 
-  Future<bool> addToWishList(int id) async {
-    _getWishListInProgress = true;
+  Future<bool> createWishList(int id) async {
+    _wishListInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.createWishList(id),
     );
-    _getWishListInProgress = false;
+    _wishListInProgress = false;
     if (response.isSuccess) {
       _addToWishListModel =
-          AddToWishListModel.fromJson(response.responseJson ?? {});
+          CreateWishListModel.fromJson(response.responseJson ?? {});
       update();
       return true;
     } else {
@@ -34,15 +34,15 @@ class WishListController extends GetxController {
     }
   }
 
-  Future<bool> wishList() async {
-    _getWishListInProgress = true;
+  Future<bool> showWishList() async {
+    _wishListInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.showWishList,
     );
-    _getWishListInProgress = false;
+    _wishListInProgress = false;
     if (response.isSuccess) {
-      _wishListModel = WishListModel.fromJson(response.responseJson ?? {});
+      _wishListModel = ShowWishListModel.fromJson(response.responseJson ?? {});
       update();
       return true;
     } else {
@@ -52,12 +52,12 @@ class WishListController extends GetxController {
   }
 
   Future<bool> deleteWishList(int id) async {
-    _getWishListInProgress = true;
+    _wishListInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
       Urls.deleteWishList(id),
     );
-    _getWishListInProgress = false;
+    _wishListInProgress = false;
     if (response.isSuccess) {
       _wishListModel.data?.removeWhere((element) => element.productId == id);
       update();
