@@ -20,7 +20,7 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
+      (_) { Get.find<CartListController>().getCartList();
         print(
             ' from cart screen ${AuthController.updateProfile}');
 
@@ -87,6 +87,14 @@ class _CartScreenState extends State<CartScreen> {
             if (cartListController.getCartListInProgress) {
               return const Center(
                 child: CircularProgressIndicator(),
+              );
+            }
+            if(cartListController.cartListModel.data?.isEmpty ?? true){
+              return const Center(
+                child: Text(
+                  'Nothing to show',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
               );
             }
             return Column(

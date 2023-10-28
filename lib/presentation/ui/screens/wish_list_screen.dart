@@ -50,32 +50,31 @@ class _WishListScreenState extends State<WishListScreen> {
                   child: CircularProgressIndicator(),
                 );
               }
-              if (showWishListController.showWishListModel.data!.isEmpty) {
+              if (showWishListController.showWishListModel.data?.isEmpty ?? true) {
                 return const Center(
                   child: Text(
                     'Nothing to show',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 );
-              } else {
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: showWishListController
-                                .showWishListModel.data?.length ??
-                            0,
-                        itemBuilder: (context, index) {
-                          return WishProductCard(
-                            showWishListData: showWishListController
-                                .showWishListModel.data![index],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                );
               }
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: showWishListController
+                          .showWishListModel.data?.length ??
+                          0,
+                      itemBuilder: (context, index) {
+                        return WishProductCard(
+                          showWishListData: showWishListController
+                              .showWishListModel.data![index],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
             },
           ),
         ),

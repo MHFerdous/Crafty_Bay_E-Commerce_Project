@@ -44,6 +44,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: CircularProgressIndicator(),
             );
           }
+
           return SafeArea(
             child: Column(
               children: [
