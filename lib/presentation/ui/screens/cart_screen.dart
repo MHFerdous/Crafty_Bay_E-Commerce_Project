@@ -1,9 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
-import 'package:crafty_bay/presentation/ui/screens/auth/update_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,12 +16,14 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-/*  @override
+  @override
   void initState() {
     super.initState();
-    print(' from cart screen ${AuthController.updateProfile}');
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
+        print(
+            ' from cart screen ${AuthController.updateProfile}');
+
         if (AuthController.updateProfile == null) {
           Get.to(
             () => const CompleteProfileScreen(),
@@ -37,19 +37,27 @@ class _CartScreenState extends State<CartScreen> {
         }
       },
     );
-  }*/
+  }
 
-  @override
+  /* @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<ProfileController>().readProfile();
-      if(ProfileController().readProfile() == null){
-
+      if (ProfileController().readProfileData.cusName == null) {
+        Get.to(
+          () => const CompleteProfileScreen(),
+        )?.then(
+          (value) {
+            Get.find<CartListController>().getCartList();
+          },
+        );
+      } else {
+        Get.find<CartListController>().getCartList();
       }
     });
     super.initState();
   }
-
+*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(

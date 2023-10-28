@@ -251,7 +251,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                               );
                               if (result) {
                                 AuthController.setReadProfile('101');
-                                print(' from complete profile screen ${AuthController.updateProfile}');
+                                print(
+                                    ' from complete profile screen ${AuthController.updateProfile}');
 
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
