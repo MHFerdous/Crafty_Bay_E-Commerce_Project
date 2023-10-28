@@ -2,6 +2,8 @@ import 'package:crafty_bay/data/models/product_details.dart';
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/review_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/custom_stepper.dart';
 import 'package:flutter/material.dart';
@@ -133,7 +135,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  print(widget.productId);
                   Get.to(
                     () => ReviewListScreen(
                       productId: widget.productId,
@@ -303,11 +304,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       if (result) {
                         Get.snackbar('Successful',
                             'This product has been added to cart');
+                        Get.offAll(
+                          () => const MainBottomNavScreen(),
+                        );
                       } else {
                         Get.snackbar(
                             'Failed', "This product couldn't be added to cart",
                             colorText: Colors.red);
                       }
+                    } else {
+                      Get.snackbar(
+                          'Failed', 'You have to create you profile first',
+                          colorText: Colors.red);
+                      Get.to(
+                        () => const CompleteProfileScreen(),
+                      );
                     }
                   },
                   child: const Text('Add to cart'),

@@ -79,13 +79,29 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
               const SizedBox(
                 height: 16,
               ),
-              SizedBox(
+              /*SizedBox(
                 width: double.infinity,
                 child: GetBuilder<ReviewController>(
                   builder: (addReviewController) {
+                    if (addReviewController.reviewInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return ElevatedButton(
                       onPressed: () async {
                         print(widget.productId);
+
+                        final result = await addReviewController.addReview(
+                            _descriptionTEController.text,
+                            widget.productId.toInt(),
+                            _ratingTEController.text);
+                        if (result) {
+                          Get.snackbar('Successful', 'Review has been added');
+                        } else {
+                          Get.snackbar(
+                              'Failed', 'Failed to add review, try again.');
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -94,9 +110,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                       ),
                       child: const Text('Submit'),
                     );
-                  }
+                  },
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

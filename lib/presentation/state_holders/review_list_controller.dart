@@ -26,8 +26,8 @@ class ReviewListController extends GetxController {
     );
     _reviewInProgress = false;
     if (response.isSuccess) {
-     // _reviewListModel = ReviewListModel.fromJson(response.responseJson ?? {});
-      _data = (ReviewListModel.fromJson(response.responseJson ?? {})).data!.first;
+      _reviewListModel = ReviewListModel.fromJson(response.responseJson ?? {});
+     // _data = (ReviewListModel.fromJson(response.responseJson ?? {})).data!.first;
       update();
       return true;
     } else {

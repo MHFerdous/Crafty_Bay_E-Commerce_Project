@@ -33,42 +33,31 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return
-                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Card(
-                      color: Colors.grey.shade100,
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GetBuilder<ReviewListController>(builder: (reviewListController) {
-                          if (reviewListController.reviewInProgress) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                          return Column(
+            child: GetBuilder<ReviewListController>(
+              builder: (reviewListController) {
+                return ListView.builder(
+                  itemCount: reviewListController.reviewListModel.data?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        color: Colors.grey.shade100,
+                        elevation: 3,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ListView.builder(
-                                  itemCount: reviewListController.reviewListModel.data?.length ?? 0,
-                                  itemBuilder: (context, index) {
-                                    return ListTile(
-                                      leading: Icon(Icons.person_outline),
-                                      title: Text(reviewListController.data.description ??
-                                          ''),
-                                    );
-                                  })
+                              Text('name'),
+                              Text('description'),
                             ],
-                          );
-                        }),
+                          ),
+                        ),
                       ),
-                    ),
-                  );
-
-              },
+                    );
+                  },
+                );
+              }
             ),
           ),
           addReviewBottomContainer()
@@ -103,8 +92,8 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
             backgroundColor: AppColors.primaryColor,
             child: IconButton(
               onPressed: () {
-                print(widget.productId)
-;                Get.to(
+                print(widget.productId);
+                Get.to(
                   () => AddReviewScreen(
                     productId: widget.productId,
                   ),

@@ -14,11 +14,11 @@ class AuthController {
     _accessToken = token;
   }
 
-  static Future<void> setUpdateProfile(String profile) async {
+  static Future<void> setReadProfile(String readProfile) async {
     final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    await sharedPreferences.setString('update_profile', profile);
-    _updateProfile = profile;
+    await SharedPreferences.getInstance();
+    await sharedPreferences.setString('read_profile', readProfile);
+    _updateProfile = readProfile;
   }
 
   static Future<void> getAccessToken() async {
@@ -27,10 +27,10 @@ class AuthController {
     _accessToken = sharedPreferences.getString('access_token');
   }
 
-  static Future<void> getUpdateProfile() async {
+  static Future<void> getReadProfile() async {
     final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    _updateProfile = sharedPreferences.getString('update_profile');
+    await SharedPreferences.getInstance();
+    _updateProfile = sharedPreferences.getString('read_profile');
   }
 
   static Future<void> saveProfileDetails(String data) async {

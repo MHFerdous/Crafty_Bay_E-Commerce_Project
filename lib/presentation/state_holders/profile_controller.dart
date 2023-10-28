@@ -10,6 +10,7 @@ class ProfileController extends GetxController {
   String _message = '';
   CompleteProfileData _completeProfileData = CompleteProfileData();
   ReadProfileData _readProfileData = ReadProfileData();
+
   bool get profileInProgress => _profileInProgress;
   String get message => _message;
   CompleteProfileData get completeProfileData => _completeProfileData;

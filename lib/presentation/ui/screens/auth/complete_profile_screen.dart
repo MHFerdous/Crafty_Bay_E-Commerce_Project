@@ -250,10 +250,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-                                print(_faxTEController.text);
-                                AuthController.setUpdateProfile(
-                                  _faxTEController.text,
-                                );
+                                AuthController.setReadProfile('101');
+                                print(' from complete profile screen ${AuthController.updateProfile}');
+
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
                                 );
