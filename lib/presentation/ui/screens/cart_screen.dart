@@ -22,7 +22,7 @@ class _CartScreenState extends State<CartScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) { Get.find<CartListController>().getCartList();
         print(
-            ' from cart screen ${AuthController.updateProfile}');
+            ' from cart screen ${AuthController.accessToken}');
 
         if (AuthController.updateProfile == null) {
           Get.to(

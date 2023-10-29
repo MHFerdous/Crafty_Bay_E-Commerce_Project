@@ -324,7 +324,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 }
                 return ElevatedButton(
                   onPressed: () async {
-                    if (AuthController.updateProfile != null) {
+                    if (AuthController.accessToken != null) {
                       final result = await addToCartController.addToCart(
                         details.id!,
                         colors[_selectedColorIndex].toString(),

@@ -250,7 +250,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-                                AuthController.setReadProfile('101');
+                                AuthController.accessToken;
                                 print(
                                     ' from complete profile screen ${AuthController.updateProfile}');
 
