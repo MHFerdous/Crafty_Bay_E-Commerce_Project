@@ -1,12 +1,12 @@
-class CreateReviewModel {
+class CreateReviewListModel {
   String? msg;
-  Data? data;
+  CreateReviewData? data;
 
-  CreateReviewModel({this.msg, this.data});
+  CreateReviewListModel({this.msg, this.data});
 
-  CreateReviewModel.fromJson(Map<String, dynamic> json) {
+  CreateReviewListModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? CreateReviewData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,7 +19,7 @@ class CreateReviewModel {
   }
 }
 
-class Data {
+class CreateReviewData {
   int? id;
   String? description;
   int? rating;
@@ -28,16 +28,16 @@ class Data {
   String? createdAt;
   String? updatedAt;
 
-  Data(
+  CreateReviewData(
       {this.id,
-      this.description,
-      this.rating,
-      this.customerId,
-      this.productId,
-      this.createdAt,
-      this.updatedAt});
+        this.description,
+        this.rating,
+        this.customerId,
+        this.productId,
+        this.createdAt,
+        this.updatedAt});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  CreateReviewData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     description = json['description'];
     rating = json['rating'];

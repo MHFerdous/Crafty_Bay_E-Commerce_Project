@@ -1,4 +1,6 @@
 import 'package:crafty_bay/presentation/state_holders/add_to_cart_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/review_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
@@ -63,6 +65,12 @@ class StateHolderBinder extends Bindings {
     );
     Get.put(
       CreateInvoiceController(),
+    );
+    Get.put(
+      ReviewListController(),
+    );
+    Get.put(
+      CreateReviewController(),
     );
   }
 }

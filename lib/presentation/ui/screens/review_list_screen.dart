@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holders/review_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/add_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +14,14 @@ class ReviewListScreen extends StatefulWidget {
 
 class _ReviewListScreenState extends State<ReviewListScreen> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ReviewListController>().reviewList(widget.productId);
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -30,43 +37,111 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
         backgroundColor: Colors.white,
         elevation: 2,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: GetBuilder<ReviewListController>(
-              builder: (reviewListController) {
-                return ListView.builder(
-                  itemCount: reviewListController.reviewListModel.data?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        color: Colors.grey.shade100,
-                        elevation: 3,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Get.find<ReviewListController>().reviewList(widget.productId);
+        },
+        child: GetBuilder<ReviewListController>(
+          builder: (reviewListController) {
+            if (reviewListController.getProductReviewInProgress) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (reviewListController.reviewListModel.data?.isEmpty ?? true) {
+              return const Center(
+                child: Text('Nothing to show'),
+              );
+            }
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount:
+                        reviewListController.reviewListModel.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          elevation: 2,
+                          margin: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 8),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('name'),
-                              Text('description'),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  reviewListController
+                                                          .reviewListModel
+                                                          .data?[index]
+                                                          .profile
+                                                          ?.cusName ??
+                                                      '',
+                                                  maxLines: 1,
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.black,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 8,
+                                                ),
+                                                Text(
+                                                  reviewListController
+                                                          .reviewListModel
+                                                          .data?[index]
+                                                          .description ??
+                                                      '',
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              }
-            ),
-          ),
-          addReviewBottomContainer()
-        ],
+                      );
+                    },
+                  ),
+                ),
+                addReviewContainer(reviewListController)
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
-  Container addReviewBottomContainer() {
+  Container addReviewContainer(ReviewListController reviewListController) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
@@ -79,9 +154,9 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Reviews (10)',
-            style: TextStyle(
+          Text(
+            'Reviews (${reviewListController.reviewListModel.data?.length ?? 0})',
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
               color: Colors.black,
@@ -92,7 +167,6 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
             backgroundColor: AppColors.primaryColor,
             child: IconButton(
               onPressed: () {
-                print(widget.productId);
                 Get.to(
                   () => AddReviewScreen(
                     productId: widget.productId,
@@ -109,39 +183,4 @@ class _ReviewListScreenState extends State<ReviewListScreen> {
       ),
     );
   }
-
-/*  Padding get reviewCard {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.grey.shade100,
-        elevation: 3,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GetBuilder<ReviewController>(builder: (reviewListController) {
-            if (reviewListController.reviewInProgress) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return Column(
-              children: [
-                ListView.builder(
-                    itemCount:
-                        reviewListController.reviewListModel.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: Icon(Icons.person_outline),
-                        title: Text(reviewListController
-                                .reviewListModel.data?[index].description ??
-                            ''),
-                      );
-                    })
-              ],
-            );
-          }),
-        ),
-      ),
-    );
-  }*/
 }

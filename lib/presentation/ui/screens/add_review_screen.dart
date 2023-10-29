@@ -1,4 +1,4 @@
-import 'package:crafty_bay/presentation/state_holders/review_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_review_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,7 +45,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
-                  hintText: 'Review',
+                  hintText: 'Review (0-100)',
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 ),
@@ -79,18 +79,17 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
               const SizedBox(
                 height: 16,
               ),
-              /*SizedBox(
+              SizedBox(
                 width: double.infinity,
-                child: GetBuilder<ReviewController>(
+                child: GetBuilder<CreateReviewController>(
                   builder: (addReviewController) {
-                    if (addReviewController.reviewInProgress) {
+                    if (addReviewController.createReviewInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
                     return ElevatedButton(
                       onPressed: () async {
-                        print(widget.productId);
 
                         final result = await addReviewController.addReview(
                             _descriptionTEController.text,
@@ -98,6 +97,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             _ratingTEController.text);
                         if (result) {
                           Get.snackbar('Successful', 'Review has been added');
+                         Get.back();
                         } else {
                           Get.snackbar(
                               'Failed', 'Failed to add review, try again.');
@@ -112,7 +112,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                     );
                   },
                 ),
-              ),*/
+              ),
             ],
           ),
         ),

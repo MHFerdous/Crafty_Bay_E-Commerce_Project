@@ -53,9 +53,7 @@ class _WishListScreenState extends State<WishListScreen> {
               if (showWishListController.showWishListModel.data?.isEmpty ?? true) {
                 return const Center(
                   child: Text(
-                    'Nothing to show',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
+                    'Nothing to show'),
                 );
               }
               return Column(
