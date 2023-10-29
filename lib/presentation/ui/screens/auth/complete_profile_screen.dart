@@ -135,8 +135,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       const SizedBox(
                         width: 16,
                       ),
-                      SizedBox(
-                        width: 180,
+                      Expanded(
+                        flex: 1,
                         child: TextFormField(
                           controller: _cityTEController,
                           textInputAction: TextInputAction.next,
@@ -183,8 +183,8 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       const SizedBox(
                         width: 16,
                       ),
-                      SizedBox(
-                        width: 150,
+                      Expanded(
+                        flex: 1,
                         child: TextFormField(
                           controller: _postCodeTEController,
                           textInputAction: TextInputAction.next,

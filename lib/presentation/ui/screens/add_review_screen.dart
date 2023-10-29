@@ -31,89 +31,90 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
         backgroundColor: Colors.white,
         elevation: 2,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 150,
-              ),
-              TextFormField(
-                controller: _ratingTEController,
-                textInputAction: TextInputAction.next,
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: 'Review (0-100)',
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 150,
                 ),
-                validator: (String? value) {
-                  if ((value?.isEmpty ?? true) || value!.length > 100) {
-                    return 'Enter review (0-100)';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              TextFormField(
-                controller: _descriptionTEController,
-                maxLines: 5,
-                textInputAction: TextInputAction.done,
-                keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
-                  hintText: 'Description',
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                ),
-                validator: (String? value) {
-                  if ((value?.isEmpty ?? true)) {
-                    return 'Enter description';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: GetBuilder<CreateReviewController>(
-                  builder: (addReviewController) {
-                    if (addReviewController.createReviewInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
+                TextFormField(
+                  controller: _ratingTEController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                    hintText: 'Review (0-100)',
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  ),
+                  validator: (String? value) {
+                    if ((value?.isEmpty ?? true) || value!.length > 100) {
+                      return 'Enter review (0-100)';
                     }
-                    return ElevatedButton(
-                      onPressed: () async {
-
-                        final result = await addReviewController.addReview(
-                            _descriptionTEController.text,
-                            widget.productId.toInt(),
-                            _ratingTEController.text);
-                        if (result) {
-                          Get.snackbar('Successful', 'Review has been added');
-                         Get.back();
-                        } else {
-                          Get.snackbar(
-                              'Failed', 'Failed to add review, try again.');
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text('Submit'),
-                    );
+                    return null;
                   },
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  controller: _descriptionTEController,
+                  maxLines: 5,
+                  textInputAction: TextInputAction.done,
+                  keyboardType: TextInputType.text,
+                  decoration: const InputDecoration(
+                    hintText: 'Description',
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  ),
+                  validator: (String? value) {
+                    if ((value?.isEmpty ?? true)) {
+                      return 'Enter description';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: GetBuilder<CreateReviewController>(
+                    builder: (addReviewController) {
+                      if (addReviewController.createReviewInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () async {
+                          final result = await addReviewController.addReview(
+                              _descriptionTEController.text,
+                              widget.productId.toInt(),
+                              _ratingTEController.text);
+                          if (result) {
+                            Get.snackbar('Successful', 'Review has been added');
+                            Get.back();
+                          } else {
+                            Get.snackbar(
+                                'Failed', 'Failed to add review, try again.');
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Submit'),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

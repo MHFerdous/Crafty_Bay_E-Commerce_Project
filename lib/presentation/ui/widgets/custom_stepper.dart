@@ -25,7 +25,7 @@ class _CustomStepperState extends State<CustomStepper> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class _CustomStepperState extends State<CustomStepper> {
           InkWell(
             borderRadius: BorderRadius.circular(30),
             child: Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(3),
@@ -66,7 +66,7 @@ class _CustomStepperState extends State<CustomStepper> {
           InkWell(
             borderRadius: BorderRadius.circular(30),
             child: Container(
-              padding: const EdgeInsets.all(4),
+              padding: const EdgeInsets.all(3),
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
                 borderRadius: BorderRadius.circular(3),

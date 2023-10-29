@@ -30,8 +30,8 @@ class _ProductCardState extends State<ProductCard> {
         );
       },
       child: Card(
-        shadowColor: AppColors.primaryColor.withOpacity(0.2),
-        elevation: 4,
+        shadowColor: AppColors.primaryColor.withOpacity(0.3),
+        elevation: 5,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -42,7 +42,7 @@ class _ProductCardState extends State<ProductCard> {
               Container(
                 height: 108,
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withOpacity(0.1),
+                  color: AppColors.primaryColor.withOpacity(0.05),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
@@ -54,7 +54,7 @@ class _ProductCardState extends State<ProductCard> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: AppColors.primaryColor.withOpacity(0.1),
+                  color: AppColors.primaryColor.withOpacity(0.05),
                   borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(8),
                     bottomRight: Radius.circular(8),

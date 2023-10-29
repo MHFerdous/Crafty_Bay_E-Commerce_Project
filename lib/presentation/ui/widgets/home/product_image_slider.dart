@@ -21,7 +21,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
         CarouselSlider(
           options: CarouselOptions(
             viewportFraction: 1,
-            height: 300.0,
+            height: 260.0,
             autoPlay: false,
             autoPlayAnimationDuration: const Duration(seconds: 3),
             onPageChanged: (int page, _) {
@@ -58,12 +58,13 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               for (int i = 0; i < widget.imageList.length; i++) {
                 list.add(
                   Container(
-                    width: 15,
-                    height: 15,
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: 12,
+                    height: 12,
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),                      color: value == i ? AppColors.primaryColor : Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                      color: value == i ? AppColors.primaryColor : Colors.white,
                     ),
                   ),
                 );

@@ -7,23 +7,22 @@ import '../widgets/product_card.dart';
 class ProductListScreen extends StatefulWidget {
   final int? categoryId;
   final ProductModel? productModel;
-  const ProductListScreen({super.key, this.categoryId, this.productModel});
+  const ProductListScreen({super.key, this.productModel, this.categoryId});
 
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
 }
 
 class _ProductListScreenState extends State<ProductListScreen> {
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        if (widget.categoryId != null) {
+        if (widget.productModel != null) {
+          Get.find<ProductListController>().setProducts(widget.productModel!);
+        } else if (widget.categoryId != null) {
           Get.find<ProductListController>()
               .getProductByCategory(widget.categoryId!);
-        } else if (widget.productModel != null) {
-          Get.find<ProductListController>().setProducts(widget.productModel!);
         }
       },
     );
@@ -48,8 +47,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          Get.find<ProductListController>()
-              .getProductByCategory(widget.categoryId!);
+          Get.find<ProductListController>().setProducts(widget.productModel!);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -64,7 +62,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
                 return const Center(
                   child: Text(
                     'Nothing to show',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
                   ),
                 );
               }

@@ -171,12 +171,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: () async {
           Get.find<PopularProductController>().getPopularProducts();
         },
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding:
+                const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 16),
             child: Column(
               children: [
                 TextField(
@@ -203,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 8,
                 ),
                 GetBuilder<HomeSlidersController>(
                   builder: (homeSliderController) {
@@ -228,9 +229,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     Get.find<MainBottomNavController>().changeScreen(1);
                   },
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 SizedBox(
                   height: 90,
@@ -263,13 +261,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 8,
                 ),
                 SectionHeader(
                   title: 'Popular',
                   onTap: () {
                     Get.to(
-                      ProductListScreen(
+                      () => ProductListScreen(
                         productModel: Get.find<PopularProductController>()
                             .popularProductModel,
                       ),
@@ -280,7 +278,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 176,
                   child: GetBuilder<PopularProductController>(
                     builder: (popularProductController) {
-                      if (popularProductController.getPopularProductsInProgress) {
+                      if (popularProductController
+                          .getPopularProductsInProgress) {
                         return const Center(
                           child: CircularProgressIndicator(),
                         );
@@ -292,8 +291,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             0,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8, right: 4, bottom: 8),
                             child: ProductCard(
                               product: popularProductController
                                   .popularProductModel.data![index],
@@ -305,13 +304,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 8,
                 ),
                 SectionHeader(
                   title: 'Special',
                   onTap: () {
                     Get.to(
-                      ProductListScreen(
+                      () => ProductListScreen(
                         productModel: Get.find<SpecialProductController>()
                             .specialProductModel,
                       ),
@@ -329,13 +328,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount:
-                            specialController.specialProductModel.data?.length ??
-                                0,
+                        itemCount: specialController
+                                .specialProductModel.data?.length ??
+                            0,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8, left: 4, bottom: 8),
                             child: ProductCard(
                               product: specialController
                                   .specialProductModel.data![index],
@@ -353,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: 'New',
                   onTap: () {
                     Get.to(
-                      ProductListScreen(
+                      () => ProductListScreen(
                         productModel:
                             Get.find<NewProductController>().newProductModel,
                       ),
@@ -375,10 +374,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             newController.newProductModel.data?.length ?? 0,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 8, left: 4, bottom: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8, left: 4, bottom: 8),
                             child: ProductCard(
-                              product: newController.newProductModel.data![index],
+                              product:
+                                  newController.newProductModel.data![index],
                             ),
                           );
                         },

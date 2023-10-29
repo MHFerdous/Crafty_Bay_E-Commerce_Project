@@ -16,9 +16,9 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(6),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: Column(
           children: [
             Container(
@@ -27,7 +27,6 @@ class CategoryCard extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-              //  color: AppColors.primaryColor.withOpacity(0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Image.network(
@@ -36,7 +35,7 @@ class CategoryCard extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 8,
+              height: 0,
             ),
             Text(
               categoryData.categoryName ?? '',

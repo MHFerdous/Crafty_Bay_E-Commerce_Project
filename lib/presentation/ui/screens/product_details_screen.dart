@@ -97,14 +97,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Row(
             children: [
               Expanded(
-                  child: Text(
-                productDetails.product?.title ?? '',
-                style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5),
-              )),
-              CustomStepper(
+                child: Text(
+                  productDetails.product?.title ?? '',
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.5),
+                ),
+              ),
+              /* CustomStepper(
                 lowerLimit: 1,
                 upperLimit: 10,
                 stepValue: 1,
@@ -112,7 +113,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 onChange: (newValue) {
                   quantity = newValue;
                 },
-              )
+              )*/
             ],
           ),
           Row(
@@ -137,7 +138,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  print(widget.productId);
                   Get.to(
                     () => ReviewListScreen(
                       productId: productDetails.product!.id!,
@@ -152,35 +152,46 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       fontWeight: FontWeight.w600),
                 ),
               ),
-              GetBuilder<WishListController>(builder: (createWishListController) {
-                return InkWell(
-                  onTap: () async {
-                    final result = await createWishListController
-                        .createWishList(widget.productId);
-                    if (result) {
-                      // _isTap = true;
-                      Get.snackbar('Successful',
-                          'This product has been added to wish list');
-                    } else {
-                      Get.snackbar('Failed',
-                          "This product couldn't be added to wish list",
-                          colorText: Colors.red);
-                    }
-                    if (result) {}
-                  },
-                  child: Card(
-                    color: AppColors.primaryColor,
-                    child: const Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: Icon(
-                        Icons.favorite_border_outlined,
-                        size: 16,
-                        color: Colors.white,
+              GetBuilder<WishListController>(
+                builder: (createWishListController) {
+                  return InkWell(
+                    onTap: () async {
+                      final result = await createWishListController
+                          .createWishList(widget.productId);
+                      if (result) {
+                        Get.snackbar('Successful',
+                            'This product has been added to wish list');
+                      } else {
+                        Get.snackbar('Failed',
+                            "This product couldn't be added to wish list",
+                            colorText: Colors.redAccent);
+                      }
+                      if (result) {}
+                    },
+                    child: Card(
+                      color: AppColors.primaryColor,
+                      child: const Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Icon(
+                          Icons.favorite_border_outlined,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              })
+                  );
+                },
+              ),
+              const Spacer(),
+              CustomStepper(
+                lowerLimit: 1,
+                upperLimit: 10,
+                stepValue: 1,
+                value: 1,
+                onChange: (newValue) {
+                  quantity = newValue;
+                },
+              )
             ],
           ),
           const SizedBox(
@@ -192,7 +203,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
-            height: 12,
+            height: 8,
           ),
           SizedBox(
             height: 30,
@@ -216,7 +227,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
-            height: 12,
+            height: 8,
           ),
           SizedBox(
             height: 30,
@@ -240,14 +251,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 fontSize: 16, color: Colors.black, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
-            height: 12,
+            height: 8,
           ),
           Text(
             productDetails.des ?? '',
             style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                letterSpacing: 0.5),
+                fontSize: 16, fontWeight: FontWeight.w300, letterSpacing: 0.5),
           ),
         ],
       ),
@@ -257,11 +266,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   AppBar get productDetailsAppBar {
     return AppBar(
       leading: const BackButton(
-        color: Colors.black45,
+        color: Colors.black38,
       ),
       title: const Text(
         'Product details',
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.black38),
       ),
       backgroundColor: Colors.transparent,
       elevation: 0,
@@ -271,7 +280,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Container cartToCartBottomContainer(
       ProductDetails details, List<String> colors, List<String> sizes) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.primaryColor.withOpacity(0.15),
         borderRadius: const BorderRadius.only(
@@ -331,12 +340,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       } else {
                         Get.snackbar(
                             'Failed', "This product couldn't be added to cart",
-                            colorText: Colors.red);
+                            colorText: Colors.redAccent);
                       }
                     } else {
                       Get.snackbar(
                           'Failed', 'You have to create you profile first',
-                          colorText: Colors.red);
+                          colorText: Colors.redAccent);
                       Get.to(
                         () => const CompleteProfileScreen(),
                       );

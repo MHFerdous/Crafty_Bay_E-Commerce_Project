@@ -20,88 +20,90 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 100,
-                ),
-                Center(
-                  child: SvgPicture.asset(
-                    ImageAssets.craftyBayLogoSVG,
-                    width: 100,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 100,
                   ),
-                ),
-                const SizedBox(
-                  height: 26,
-                ),
-                Text(
-                  'Welcome',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(fontSize: 32),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  'Please Enter Your Email Address',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: Colors.grey.shade500),
-                ),
-                const SizedBox(
-                  height: 26,
-                ),
-                TextFormField(
-                  controller: _emailTEController,
-                  textInputAction: TextInputAction.done,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    hintText: 'Email Address',
+                  Center(
+                    child: SvgPicture.asset(
+                      ImageAssets.craftyBayLogoSVG,
+                      width: 100,
+                    ),
                   ),
-                  validator: (String? value) {
-                    if (value?.trim().isEmpty ?? true) {
-                      return 'Please enter your email';
-                    }
-                    if (value!.isEmail == false) {
-                      return 'Enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: GetBuilder<EmailVerificationController>(
-                    builder: (controller) {
-                      {
-                        if (controller.emailVerificationInProgress) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                  const SizedBox(
+                    height: 26,
+                  ),
+                  Text(
+                    'Welcome',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontSize: 32),
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    'Please Enter Your Email Address',
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall
+                        ?.copyWith(color: Colors.grey.shade500),
+                  ),
+                  const SizedBox(
+                    height: 26,
+                  ),
+                  TextFormField(
+                    controller: _emailTEController,
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: 'Email Address',
+                    ),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
                       }
-                      return ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            verifyEmail(controller);
-                          }
-                        },
-                        child: const Text('Next'),
-                      );
+                      if (value!.isEmail == false) {
+                        return 'Enter a valid email';
+                      }
+                      return null;
                     },
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: GetBuilder<EmailVerificationController>(
+                      builder: (controller) {
+                        {
+                          if (controller.emailVerificationInProgress) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        }
+                        return ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              verifyEmail(controller);
+                            }
+                          },
+                          child: const Text('Next'),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
