@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
@@ -250,9 +249,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-                                AuthController.accessToken;
-                                print(
-                                    ' from complete profile screen ${AuthController.updateProfile}');
 
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),

@@ -67,7 +67,8 @@ class ProfileController extends GetxController {
     );
     _profileInProgress = false;
     if (response.isSuccess) {
-      _readProfileData = ReadProfileModel.fromJson(response.responseJson!).data!;
+      _readProfileData =
+          ReadProfileModel.fromJson(response.responseJson!).data!;
       update();
       return true;
     } else {

@@ -1,8 +1,6 @@
-import 'package:crafty_bay/presentation/state_holders/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
-import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/update_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/image_assets.dart';
@@ -39,15 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.person_2_outlined,
               onTap: () {
-                if (AuthController.updateProfile != null) {
-                  Get.to(
-                    () => const UpdateProfileScreen(),
-                  );
-                } else {
-                  Get.to(
-                    () => const CompleteProfileScreen(),
-                  );
-                }
+                Get.to(
+                  () => const UpdateProfileScreen(),
+                );
               },
             ),
             const SizedBox(
