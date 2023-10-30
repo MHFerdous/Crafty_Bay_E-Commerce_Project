@@ -8,15 +8,15 @@ import '../../data/utility/urls.dart';
 class ProfileController extends GetxController {
   bool _profileInProgress = false;
   String _message = '';
-  CompleteProfileData _completeProfileData = CompleteProfileData();
+  CreateProfileData _completeProfileData = CreateProfileData();
   ReadProfileData _readProfileData = ReadProfileData();
 
   bool get profileInProgress => _profileInProgress;
   String get message => _message;
-  CompleteProfileData get completeProfileData => _completeProfileData;
+  CreateProfileData get completeProfileData => _completeProfileData;
   ReadProfileData get readProfileData => _readProfileData;
 
-  Future<bool> completeProfile(
+  Future<bool> createProfile(
     String name,
     String address,
     String city,

@@ -39,9 +39,5 @@ class Urls {
 
   static const String createReview = '$_baseUrl/CreateProductReview';
 
-  static  String reviewList(int id) => '$_baseUrl/ListReviewByProduct/$id';
-
-
-
-
+  static String reviewList(int id) => '$_baseUrl/ListReviewByProduct/$id';
 }

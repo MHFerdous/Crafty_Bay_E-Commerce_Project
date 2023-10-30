@@ -1,12 +1,13 @@
 class CreateProfileModel {
   String? msg;
-  CompleteProfileData? data;
+  CreateProfileData? data;
 
   CreateProfileModel({this.msg, this.data});
 
   CreateProfileModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    data = json['data'] != null ? CompleteProfileData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? CreateProfileData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,7 +20,7 @@ class CreateProfileModel {
   }
 }
 
-class CompleteProfileData {
+class CreateProfileData {
   int? id;
   String? cusName;
   String? cusAdd;
@@ -40,7 +41,7 @@ class CompleteProfileData {
   String? createdAt;
   String? updatedAt;
 
-  CompleteProfileData(
+  CreateProfileData(
       {this.id,
       this.cusName,
       this.cusAdd,
@@ -61,7 +62,7 @@ class CompleteProfileData {
       this.createdAt,
       this.updatedAt});
 
-  CompleteProfileData.fromJson(Map<String, dynamic> json) {
+  CreateProfileData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     cusName = json['cus_name'];
     cusAdd = json['cus_add'];

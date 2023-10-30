@@ -7,7 +7,7 @@ import '../utility/app_colors.dart';
 import 'custom_stepper.dart';
 
 class CartProductCard extends StatefulWidget {
-  final CartData cartData;
+  final CartListData cartData;
   const CartProductCard({
     super.key,
     required this.cartData,

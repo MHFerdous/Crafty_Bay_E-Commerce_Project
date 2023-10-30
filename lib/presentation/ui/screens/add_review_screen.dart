@@ -91,7 +91,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                       }
                       return ElevatedButton(
                         onPressed: () async {
-                          final result = await addReviewController.addReview(
+                          final result = await addReviewController.createReview(
                               _descriptionTEController.text,
                               widget.productId.toInt(),
                               _ratingTEController.text);

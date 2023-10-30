@@ -6,7 +6,8 @@ class CreateWishListModel {
 
   CreateWishListModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
-    data = json['data'] != null ? CreateWishListData.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? CreateWishListData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -26,7 +27,8 @@ class CreateWishListData {
   String? createdAt;
   int? id;
 
-  CreateWishListData({this.userId, this.productId, this.updatedAt, this.createdAt, this.id});
+  CreateWishListData(
+      {this.userId, this.productId, this.updatedAt, this.createdAt, this.id});
 
   CreateWishListData.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];

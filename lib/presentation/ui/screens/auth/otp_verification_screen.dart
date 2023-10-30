@@ -212,7 +212,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
         () => const CompleteProfileScreen(),
       );
     } else {
-      Get.snackbar('Failed', 'OTP verification failed, try again.', backgroundColor: Colors.redAccent);
+      Get.snackbar('Failed', 'OTP verification failed, try again.',
+          backgroundColor: Colors.redAccent);
     }
   }
 

@@ -4,9 +4,9 @@ import '../utility/app_colors.dart';
 class SizePicker extends StatefulWidget {
   const SizePicker(
       {Key? key,
-        required this.sizes,
-        required this.onSelected,
-        required this.initialSelected})
+      required this.sizes,
+      required this.onSelected,
+      required this.initialSelected})
       : super(key: key);
 
   final List<String> sizes;
@@ -49,7 +49,7 @@ class _SizePickerState extends State<SizePicker> {
               border: Border.all(color: Colors.grey),
               borderRadius: BorderRadius.circular(8),
               color:
-              _selectedSizeIndex == index ? AppColors.primaryColor : null,
+                  _selectedSizeIndex == index ? AppColors.primaryColor : null,
             ),
             alignment: Alignment.center,
             child: Text(widget.sizes[index]),

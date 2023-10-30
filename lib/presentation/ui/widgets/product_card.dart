@@ -16,7 +16,6 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-
   @override
   Widget build(BuildContext context) {
     return InkWell(

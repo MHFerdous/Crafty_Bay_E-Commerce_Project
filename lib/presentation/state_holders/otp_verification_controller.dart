@@ -6,11 +6,10 @@ import '../../data/utility/urls.dart';
 
 class OtpVerificationController extends GetxController {
   bool _otpVerificationInProgress = false;
-  String _message = '';
+  //String _message = '';
 
   bool get otpVerificationInProgress => _otpVerificationInProgress;
-
-  String get message => _message;
+  //String get message => _message;
 
   Future<bool> verifyOtp(String email, String otp) async {
     _otpVerificationInProgress = true;

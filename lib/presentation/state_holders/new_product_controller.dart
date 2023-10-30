@@ -6,15 +6,11 @@ import '../../data/utility/urls.dart';
 
 class NewProductController extends GetxController {
   bool _getNewProductsInProgress = false;
-
   ProductModel _newProductModel = ProductModel();
-
   String _errorMessage = '';
 
   bool get getNewProductsInProgress => _getNewProductsInProgress;
-
   ProductModel get newProductModel => _newProductModel;
-
   String get errorMessage => _errorMessage;
 
   Future<bool> getNewProducts() async {

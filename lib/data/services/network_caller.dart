@@ -19,7 +19,7 @@ class NetworkCaller {
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
-        print(response.statusCode.toString());
+        log(response.statusCode.toString());
 
         return NetworkResponse(
           true,

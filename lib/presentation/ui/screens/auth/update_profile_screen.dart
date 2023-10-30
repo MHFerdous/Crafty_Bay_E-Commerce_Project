@@ -252,7 +252,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         return ElevatedButton(
                           onPressed: () async {
                             final result =
-                                await createProfileController.completeProfile(
+                                await createProfileController.createProfile(
                               _fullNameTEController.text.trim(),
                               _shippingAddressTEController.text.trim(),
                               _cityTEController.text.trim(),

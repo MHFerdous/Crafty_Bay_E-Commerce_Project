@@ -12,7 +12,7 @@ class CreateInvoiceController extends GetxController {
 
   bool get invoiceInProgress => _invoiceInProgress;
   String get message => _message;
-  InvoiceCreateData? get invoiceCreateResponseModel =>
+  InvoiceCreateResponseData? get invoiceCreateResponseModel =>
       _invoiceCreateResponseModel.data?.first;
 
   Future<bool> createInvoice() async {

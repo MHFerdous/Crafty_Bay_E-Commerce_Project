@@ -45,7 +45,8 @@ class _CraftyBayState extends State<CraftyBay> {
         const GetSnackBar(
           title: 'No Internet',
           message: 'Please check your internet connection',
-          backgroundColor: Colors.red,
+          snackStyle: SnackStyle.FLOATING,
+          backgroundColor: Colors.redAccent,
         ),
       );
     } else {

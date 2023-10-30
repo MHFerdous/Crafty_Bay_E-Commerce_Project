@@ -7,7 +7,8 @@ class MainBottomNavController extends GetxController {
     currentSelectedIndex = index;
     update();
   }
-  void backToHome(){
+
+  void backToHome() {
     changeScreen(0);
   }
 }

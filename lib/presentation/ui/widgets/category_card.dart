@@ -31,7 +31,7 @@ class CategoryCard extends StatelessWidget {
               ),
               child: Image.network(
                 categoryData.categoryImg ?? '',
-               // height: 10,
+                // height: 10,
               ),
             ),
             const SizedBox(

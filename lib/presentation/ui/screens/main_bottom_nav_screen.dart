@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/main_bottom_nav_controller.dart';
@@ -37,7 +36,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
       Get.find<NewProductController>().getNewProducts();
       Get.find<SpecialProductController>().getSpecialProducts();
       //Get.find<CartListController>().getCartList();
-      Get.find<WishListController>().showWishList();
+      //Get.find<WishListController>().showWishList();
     });
     super.initState();
   }

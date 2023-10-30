@@ -13,7 +13,7 @@ class CreateReviewController extends GetxController {
   String get message => _message;
   CreateReviewListModel get createReviewListModel => _createReviewListModel;
 
-  Future<bool> addReview(
+  Future<bool> createReview(
       String description, int productId, String rating) async {
     _createReviewInProgress = true;
     update();

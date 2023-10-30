@@ -1,7 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/wish_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../data/models/wish_list_model.dart';
+import '../../../data/models/show_wish_list_model.dart';
 import '../utility/app_colors.dart';
 
 class WishProductCard extends StatefulWidget {

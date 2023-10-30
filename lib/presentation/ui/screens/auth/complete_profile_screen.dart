@@ -238,7 +238,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
                               final result =
-                                  await createProfileController.completeProfile(
+                                  await createProfileController.createProfile(
                                 _fullNameTEController.text.trim(),
                                 _shippingAddressTEController.text.trim(),
                                 _cityTEController.text.trim(),
@@ -249,7 +249,6 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 _faxTEController.text.trim(),
                               );
                               if (result) {
-
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
                                 );

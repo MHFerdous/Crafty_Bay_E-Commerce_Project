@@ -2,16 +2,16 @@ import 'package:crafty_bay/data/models/payment_method.dart';
 
 class InvoiceCreateResponseModel {
   String? msg;
-  List<InvoiceCreateData>? data;
+  List<InvoiceCreateResponseData>? data;
 
   InvoiceCreateResponseModel({this.msg, this.data});
 
   InvoiceCreateResponseModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <InvoiceCreateData>[];
+      data = <InvoiceCreateResponseData>[];
       json['data'].forEach((v) {
-        data!.add(InvoiceCreateData.fromJson(v));
+        data!.add(InvoiceCreateResponseData.fromJson(v));
       });
     }
   }
@@ -26,15 +26,16 @@ class InvoiceCreateResponseModel {
   }
 }
 
-class InvoiceCreateData {
+class InvoiceCreateResponseData {
   List<PaymentMethod>? paymentMethod;
   int? payable;
   int? vat;
   int? total;
 
-  InvoiceCreateData({this.paymentMethod, this.payable, this.vat, this.total});
+  InvoiceCreateResponseData(
+      {this.paymentMethod, this.payable, this.vat, this.total});
 
-  InvoiceCreateData.fromJson(Map<String, dynamic> json) {
+  InvoiceCreateResponseData.fromJson(Map<String, dynamic> json) {
     if (json['paymentMethod'] != null) {
       paymentMethod = <PaymentMethod>[];
       json['paymentMethod'].forEach((v) {
@@ -57,5 +58,3 @@ class InvoiceCreateData {
     return data;
   }
 }
-
-

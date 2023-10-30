@@ -6,15 +6,11 @@ import '../../data/utility/urls.dart';
 
 class PopularProductController extends GetxController {
   bool _getPopularProductsInProgress = false;
-
   ProductModel _popularProductModel = ProductModel();
-
   String _errorMessage = '';
 
   bool get getPopularProductsInProgress => _getPopularProductsInProgress;
-
   ProductModel get popularProductModel => _popularProductModel;
-
   String get errorMessage => _errorMessage;
 
   Future<bool> getPopularProducts() async {
