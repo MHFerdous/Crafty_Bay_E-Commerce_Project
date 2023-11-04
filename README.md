@@ -28,7 +28,7 @@ lib/\
 │   │   └── network_caller.dart\
 │   └── utility/\
 │       └── urls.dart\
-├── presention/\
+├── presentation/\
 │   ├── state_holders/\
 │   │   └── all controller files...\
 │   └── ui/\
