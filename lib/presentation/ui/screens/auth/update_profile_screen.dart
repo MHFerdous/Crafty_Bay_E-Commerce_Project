@@ -24,6 +24,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       TextEditingController();
   final TextEditingController _emailTEController = TextEditingController();
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -52,237 +54,245 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           child: GetBuilder<ProfileController>(
             builder: (updateProfileController) {
               _fullNameTEController.text =
-                  updateProfileController.readProfileData.cusName ?? '';
+                  updateProfileController.readProfileModel.data?.cusName ?? '';
               _shippingAddressTEController.text =
-                  updateProfileController.readProfileData.cusAdd ?? '';
+                  updateProfileController.readProfileModel.data?.cusAdd ?? '';
               _cityTEController.text =
-                  updateProfileController.readProfileData.cusCity ?? '';
+                  updateProfileController.readProfileModel.data?.cusCity ?? '';
               _postCodeTEController.text =
-                  updateProfileController.readProfileData.cusPostcode ?? '';
+                  updateProfileController.readProfileModel.data?.cusPostcode ??
+                      '';
               _countryTEController.text =
-                  updateProfileController.readProfileData.cusCountry ?? '';
+                  updateProfileController.readProfileModel.data?.cusCountry ??
+                      '';
               _phoneNumberTEController.text =
-                  updateProfileController.readProfileData.cusPhone ?? '';
+                  updateProfileController.readProfileModel.data?.cusPhone ?? '';
               _emailTEController.text =
-                  updateProfileController.readProfileData.user?.email ?? '';
+                  updateProfileController.readProfileModel.data?.user?.email ??
+                      '';
               _faxTEController.text =
-                  updateProfileController.readProfileData.cusFax ?? '';
+                  updateProfileController.readProfileModel.data?.cusFax ?? '';
 
-              return Column(
-                children: [
-                  const SizedBox(
-                    height: 80,
-                  ),
-                  Text(
-                    'Update Profile',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontSize: 32),
-                  ),
-                  const SizedBox(
-                    height: 36,
-                  ),
-                  TextFormField(
-                    controller: _fullNameTEController,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      hintText: 'Full Name',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              return Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 80,
                     ),
-                    validator: (String? value) {
-                      if ((value?.isEmpty ?? true) || value!.length < 5) {
-                        return 'Enter your full name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: _phoneNumberTEController,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(
-                      hintText: 'Phone Number',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    Text(
+                      'Update Profile',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(fontSize: 32),
                     ),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Enter your phone number';
-                      }
-                      if (value!.length < 11 || value.length > 11) {
-                        return 'Enter a valid phone number';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                    width: 50,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 180,
-                        child: TextFormField(
-                          controller: _countryTEController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'Country',
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                          ),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your country name';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: TextFormField(
-                          controller: _cityTEController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'City',
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                          ),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your city';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 210,
-                        child: TextFormField(
-                          controller: _faxTEController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'Fax',
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                          ),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your fax number';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: TextFormField(
-                          controller: _postCodeTEController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.text,
-                          decoration: const InputDecoration(
-                            hintText: 'PostCode',
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 16),
-                          ),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Enter your postCode';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    maxLines: 4,
-                    controller: _shippingAddressTEController,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(
-                      hintText: 'Shipping Address',
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    const SizedBox(
+                      height: 36,
                     ),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Enter your shipping address';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: GetBuilder<ProfileController>(
-                      builder: (createProfileController) {
-                        if (createProfileController.profileInProgress) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                    TextFormField(
+                      controller: _fullNameTEController,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        hintText: 'Full Name',
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      ),
+                      validator: (String? value) {
+                        if ((value?.isEmpty ?? true) || value!.length < 5) {
+                          return 'Enter your full name';
                         }
-                        return ElevatedButton(
-                          onPressed: () async {
-                            final result =
-                                await createProfileController.createProfile(
-                              _fullNameTEController.text.trim(),
-                              _shippingAddressTEController.text.trim(),
-                              _cityTEController.text.trim(),
-                              _cityTEController.text.trim(),
-                              _postCodeTEController.text.trim(),
-                              _countryTEController.text.trim(),
-                              _phoneNumberTEController.text.trim(),
-                              _faxTEController.text.trim(),
-                            );
-                            if (result) {
-                              Get.snackbar(
-                                  'Successful!', 'Profile has been created');
-
-                              Get.offAll(
-                                () => const MainBottomNavScreen(),
-                              );
-                            } else {
-                              Get.snackbar(
-                                  'Failed!', "Profile couldn't be created",
-                                  colorText: Colors.red);
-                            }
-                          },
-                          child: const Text(
-                            'Update Profile',
-                          ),
-                        );
+                        return null;
                       },
                     ),
-                  )
-                ],
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      controller: _phoneNumberTEController,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                        hintText: 'Phone Number',
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      ),
+                      validator: (String? value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Enter your phone number';
+                        }
+                        if (value!.length < 11 || value.length > 11) {
+                          return 'Enter a valid phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                      width: 50,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 180,
+                          child: TextFormField(
+                            controller: _countryTEController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              hintText: 'Country',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                            ),
+                            validator: (String? value) {
+                              if (value?.isEmpty ?? true) {
+                                return 'Enter your country name';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: TextFormField(
+                            controller: _cityTEController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              hintText: 'City',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                            ),
+                            validator: (String? value) {
+                              if (value?.isEmpty ?? true) {
+                                return 'Enter your city';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 210,
+                          child: TextFormField(
+                            controller: _faxTEController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              hintText: 'Fax',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                            ),
+                            validator: (String? value) {
+                              if (value?.isEmpty ?? true) {
+                                return 'Enter your fax number';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: TextFormField(
+                            controller: _postCodeTEController,
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.text,
+                            decoration: const InputDecoration(
+                              hintText: 'PostCode',
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 16),
+                            ),
+                            validator: (String? value) {
+                              if (value?.isEmpty ?? true) {
+                                return 'Enter your postCode';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      maxLines: 4,
+                      controller: _shippingAddressTEController,
+                      textInputAction: TextInputAction.done,
+                      decoration: const InputDecoration(
+                        hintText: 'Shipping Address',
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      ),
+                      validator: (String? value) {
+                        if (value?.isEmpty ?? true) {
+                          return 'Enter your shipping address';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: GetBuilder<ProfileController>(
+                        builder: (createProfileController) {
+                          if (createProfileController.profileInProgress) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final result =
+                                    await createProfileController.createProfile(
+                                  _fullNameTEController.text.trim(),
+                                  _shippingAddressTEController.text.trim(),
+                                  _cityTEController.text.trim(),
+                                  _cityTEController.text.trim(),
+                                  _postCodeTEController.text.trim(),
+                                  _countryTEController.text.trim(),
+                                  _phoneNumberTEController.text.trim(),
+                                  _faxTEController.text.trim(),
+                                );
+                                if (result) {
+                                  Get.snackbar('Successful!',
+                                      'Profile has been created');
+
+                                  Get.offAll(
+                                    () => const MainBottomNavScreen(),
+                                  );
+                                } else {
+                                  Get.snackbar(
+                                      'Failed!', "Profile couldn't be created",
+                                      colorText: Colors.red);
+                                }
+                              }
+                            },
+                            child: const Text(
+                              'Update Profile',
+                            ),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
               );
             },
           ),

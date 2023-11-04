@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
+import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -52,6 +55,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     startTimer();
     Timer(const Duration(seconds: 120), () {
       isButtonDisabled = false;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProfileController>().readProfileModel;
     });
   }
 
@@ -206,11 +212,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       _otpTEController.text.trim(),
     );
     if (response) {
-      Get.snackbar('Successful', 'Welcome to Crafty Bay');
+      if (ProfileController().readProfileModel.data.isBlank ?? true) {
+        log(ProfileController().readProfileModel.data.isBlank.toString());
+        Get.snackbar('No profile found', 'Please complete profile first');
 
-      Get.offAll(
-        () => const CompleteProfileScreen(),
-      );
+        Get.offAll(
+          () => const CompleteProfileScreen(),
+        );
+      } else {
+        Get.snackbar('Successful', 'Welcome to Crafty Bay');
+
+        Get.offAll(
+          () => const MainBottomNavScreen(),
+        );
+      }
     } else {
       Get.snackbar('Failed', 'OTP verification failed, try again.',
           backgroundColor: Colors.redAccent);
@@ -224,6 +239,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
     if (response) {
       Get.snackbar('Successful', emailVerificationController.message);
+
       Get.offAll(
         () => OtpVerificationScreen(
           email: widget.email,

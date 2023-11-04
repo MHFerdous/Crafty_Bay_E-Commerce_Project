@@ -252,12 +252,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                                 Get.offAll(
                                   () => const MainBottomNavScreen(),
                                 );
-                                Get.snackbar(
-                                    'Successful!', 'Profile has been created');
+                                Get.snackbar('Successful!',
+                                    'Profile has been created and welcome to Crafty Bay');
                               } else {
                                 Get.snackbar(
                                     'Failed!', "Profile couldn't be created",
-                                    colorText: Colors.red);
+                                    colorText: Colors.redAccent);
                               }
                             }
                           },

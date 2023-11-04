@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
+import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Get.find<ProfileController>().readProfileModel;
     gotoNextScreen();
   }
 
@@ -24,11 +28,29 @@ class _SplashScreenState extends State<SplashScreen> {
     await AuthController.getAccessToken();
     Future.delayed(const Duration(seconds: 3)).then(
       (value) {
-        Get.offAll(
+        log(AuthController.isLoggedIn.toString());
+
+        /*Get.offAll(
           () => AuthController.isLoggedIn
               ? const MainBottomNavScreen()
               : const EmailVerificationScreen(),
-        );
+        );*/
+
+        if (AuthController.isLoggedIn == false) {
+          Get.offAll(
+            () => const EmailVerificationScreen(),
+          );
+        } else {
+          if (ProfileController().readProfileModel.data.isBlank ?? true) {
+            Get.offAll(
+              () => const CompleteProfileScreen(),
+            );
+          } else {
+            Get.offAll(
+              () => const MainBottomNavScreen(),
+            );
+          }
+        }
       },
     );
   }
