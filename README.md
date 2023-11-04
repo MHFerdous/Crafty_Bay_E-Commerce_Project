@@ -7,7 +7,7 @@ In today's fast-paced world, we don't always have time to go to physical stores 
 
 # Tools:
 
-Framework: Flutter__
+Framework: Flutter\
 State Management: GetX__
 Backend: API__
 Architecture: tried to follow MVVM architecture
