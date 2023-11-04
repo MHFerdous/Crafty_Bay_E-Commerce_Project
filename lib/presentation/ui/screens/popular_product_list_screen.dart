@@ -3,12 +3,12 @@ import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/*
 class PopularProductListScreen extends StatefulWidget {
   const PopularProductListScreen({Key? key}) : super(key: key);
 
   @override
-  State<PopularProductListScreen> createState() => _PopularProductListScreenState();
+  State<PopularProductListScreen> createState() =>
+      _PopularProductListScreenState();
 }
 
 class _PopularProductListScreenState extends State<PopularProductListScreen> {
@@ -46,7 +46,9 @@ class _PopularProductListScreenState extends State<PopularProductListScreen> {
                   mainAxisSpacing: 8,
                   mainAxisExtent: 160,
                 ),
-                itemCount: popularProductController.popularProductModel.data?.length ?? 0,
+                itemCount:
+                    popularProductController.popularProductModel.data?.length ??
+                        0,
                 itemBuilder: (context, index) {
                   return FittedBox(
                     child: ProductCard(
@@ -63,4 +65,3 @@ class _PopularProductListScreenState extends State<PopularProductListScreen> {
     );
   }
 }
-*/

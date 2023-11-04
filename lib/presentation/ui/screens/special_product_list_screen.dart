@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../state_holders/special_product_controller.dart';
 
-/*
 class SpecialProductListScreen extends StatefulWidget {
   const SpecialProductListScreen({Key? key}) : super(key: key);
 
@@ -66,4 +65,3 @@ class _SpecialProductListScreenState extends State<SpecialProductListScreen> {
     );
   }
 }
-*/

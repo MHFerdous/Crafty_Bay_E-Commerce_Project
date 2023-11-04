@@ -3,7 +3,6 @@ import 'package:crafty_bay/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/*
 class NewProductListScreen extends StatefulWidget {
   const NewProductListScreen({Key? key}) : super(key: key);
 
@@ -64,4 +63,3 @@ class _NewProductListScreenState extends State<NewProductListScreen> {
     );
   }
 }
-*/
