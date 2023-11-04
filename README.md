@@ -17,3 +17,32 @@ State Management: GetX\
 Backend: API\
 Architecture: tried to follow MVVM architecture
 
+.
+└── lib/\
+    ├── application/\
+    │   ├── app.dart\
+    │   └── state_holder_binders.dart\
+    ├── data/\
+    │   ├── models/\
+    │   │   └── all model files...\
+    │   ├── services/\
+    │   │   └── network_caller.dart\
+    │   └── utility/\
+    │       └── urls.dart\
+    ├── presention/\
+    │   ├── state_holders/\
+    │   │   └── all controller files...\
+    │   └── ui/\
+    │       ├── screens/\
+    │       │   ├── auth/\
+    │       │   │   └── auth related screens files...\
+    │       │   └── other screens files...\
+    │       ├── utility/\
+    │       │   ├── app_colors.dart\
+    │       │   └── image_assets.dart\
+    │       └── widgets/\
+    │           ├── home widgets/\
+    │           │   └── home screen related widgets files...\
+    │           └── other screen widgets files are here\
+    └── main.dart\
+
