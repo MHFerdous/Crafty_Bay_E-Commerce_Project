@@ -16,6 +16,7 @@ class WishProductCard extends StatefulWidget {
 }
 
 class _WishProductCardState extends State<WishProductCard> {
+
   @override
   Widget build(BuildContext context) {
     return Card(

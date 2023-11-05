@@ -212,8 +212,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       _otpTEController.text.trim(),
     );
     if (response) {
-      if (ProfileController().readProfileModel.data.isBlank ?? true) {
-        log(ProfileController().readProfileModel.data.isBlank.toString());
+      log(ProfileController().readProfileModel.data.toString());
+
+      if (ProfileController().readProfileModel.data == null) {
         Get.snackbar('No profile found', 'Please complete profile first');
 
         Get.offAll(
