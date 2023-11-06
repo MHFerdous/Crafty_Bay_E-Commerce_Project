@@ -1,4 +1,4 @@
-import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/create_profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -227,9 +227,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ),
                   SizedBox(
                     width: double.infinity,
-                    child: GetBuilder<ProfileController>(
+                    child: GetBuilder<CreateProfileController>(
                       builder: (createProfileController) {
-                        if (createProfileController.profileInProgress) {
+                        if (createProfileController.createProfileInProgress) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );

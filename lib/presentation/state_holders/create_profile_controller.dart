@@ -1,22 +1,17 @@
 import 'package:crafty_bay/data/models/create_profile_model.dart';
 import 'package:crafty_bay/data/models/network_response.dart';
-import 'package:crafty_bay/data/models/read_profile_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../../data/utility/urls.dart';
 
-class ProfileController extends GetxController {
-  bool _profileInProgress = false;
+class CreateProfileController extends GetxController {
+  bool _createProfileInProgress = false;
   String _message = '';
-  CreateProfileData _completeProfileData = CreateProfileData();
-  ReadProfileModel _readProfileModel = ReadProfileModel();
-  ReadProfileData _readProfileData = ReadProfileData();
+  CreateProfileData _createProfileData = CreateProfileData();
 
-  bool get profileInProgress => _profileInProgress;
+  bool get createProfileInProgress => _createProfileInProgress;
   String get message => _message;
-  CreateProfileData get completeProfileData => _completeProfileData;
-  ReadProfileData get readProfileData => _readProfileData;
-  ReadProfileModel get readProfileModel => _readProfileModel;
+  CreateProfileData get completeProfileData => _createProfileData;
 
   Future<bool> createProfile(
     String name,
@@ -28,7 +23,7 @@ class ProfileController extends GetxController {
     String phone,
     String fax,
   ) async {
-    _profileInProgress = true;
+    _createProfileInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.postRequest(
       Urls.createProfile,
@@ -50,32 +45,13 @@ class ProfileController extends GetxController {
         "ship_phone": phone,
       },
     );
-    _profileInProgress = false;
+    _createProfileInProgress = false;
     if (response.isSuccess) {
-      _completeProfileData =
+      _createProfileData =
           CreateProfileModel.fromJson(response.responseJson ?? {}).data!;
       return true;
     } else {
       _message = 'Failed to create profile';
-      return false;
-    }
-  }
-
-  Future<bool> readProfile() async {
-    _profileInProgress = false;
-    update();
-    final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.readProfile,
-    );
-    _profileInProgress = false;
-    if (response.isSuccess) {
-      _readProfileModel = ReadProfileModel.fromJson(response.responseJson!);
-       _readProfileData =
-          ReadProfileModel.fromJson(response.responseJson!).data!;
-      update();
-      return true;
-    } else {
-      _message = 'Unable to read profile data';
       return false;
     }
   }

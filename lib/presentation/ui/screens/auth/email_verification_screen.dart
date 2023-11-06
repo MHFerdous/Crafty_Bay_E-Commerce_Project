@@ -123,7 +123,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         ),
       );
     } else {
-      Get.snackbar('Failed', controller.message, backgroundColor: Colors.red);
+      Get.snackbar('Failed', controller.message,
+          backgroundColor: Colors.redAccent);
     }
   }
 }

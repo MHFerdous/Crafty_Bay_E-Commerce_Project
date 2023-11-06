@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../state_holders/profile_controller.dart';
+import '../../../state_holders/create_profile_controller.dart';
+import '../../../state_holders/read_profile_controller.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({
@@ -32,7 +31,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<ProfileController>().readProfile();
+      Get.find<ReadProfileController>().readProfileData();
     });
   }
 
@@ -53,7 +52,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: GetBuilder<ProfileController>(
+          child: GetBuilder<ReadProfileController>(
             builder: (updateProfileController) {
               _fullNameTEController.text =
                   updateProfileController.readProfileModel.data?.cusName ?? '';
@@ -251,9 +250,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: GetBuilder<ProfileController>(
+                      child: GetBuilder<CreateProfileController>(
                         builder: (createProfileController) {
-                          if (createProfileController.profileInProgress) {
+                          if (createProfileController.createProfileInProgress) {
                             return const Center(
                               child: CircularProgressIndicator(),
                             );
@@ -273,9 +272,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   _faxTEController.text.trim(),
                                 );
                                 if (result) {
-                                  log(ProfileController().readProfileModel.data.toString());
-                                  log(ProfileController().readProfileData.cusName.toString());
-
                                   Get.snackbar('Successful!',
                                       'Profile has been updated');
 

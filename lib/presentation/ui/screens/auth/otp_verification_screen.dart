@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:crafty_bay/presentation/state_holders/otp_verification_controller.dart';
-import 'package:crafty_bay/presentation/state_holders/profile_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../state_holders/email_verification_controller.dart';
+import '../../../state_holders/read_profile_controller.dart';
 import '../../utility/app_colors.dart';
 import '../../utility/image_assets.dart';
 
@@ -55,9 +54,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     startTimer();
     Timer(const Duration(seconds: 120), () {
       isButtonDisabled = false;
-    });
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<ProfileController>().readProfileModel;
     });
   }
 
@@ -208,27 +204,20 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Future<void> verifyOtp(
       OtpVerificationController otpVerificationController) async {
     final response = await otpVerificationController.verifyOtp(
-      widget.email,
-      _otpTEController.text.trim(),
-    );
+        widget.email, _otpTEController.text.trim());
     if (response) {
-      log(ProfileController().readProfileModel.data.toString());
+      Get.snackbar('Successful', 'OTP verification has been completed.');
+      await Get.find<ReadProfileController>().readProfileData();
 
-      if (ProfileController().readProfileModel.data == null) {
-        Get.snackbar('No profile found', 'Please complete profile first');
-
-        Get.offAll(
-          () => const CompleteProfileScreen(),
-        );
-      } else {
-        Get.snackbar('Successful', 'Welcome to Crafty Bay');
-
-        Get.offAll(
-          () => const MainBottomNavScreen(),
-        );
-      }
+      Get.find<ReadProfileController>().readProfileModel.data == null
+          ? Get.offAll(
+              () => const CompleteProfileScreen(),
+            )
+          : Get.offAll(
+              () => const MainBottomNavScreen(),
+            );
     } else {
-      Get.snackbar('Failed', 'OTP verification failed, try again.',
+      Get.snackbar('Failed', 'Otp verification failed! Try again',
           backgroundColor: Colors.redAccent);
     }
   }

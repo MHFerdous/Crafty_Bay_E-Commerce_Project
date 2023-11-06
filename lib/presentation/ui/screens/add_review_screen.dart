@@ -100,7 +100,8 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             Get.back();
                           } else {
                             Get.snackbar(
-                                'Failed', 'Failed to add review, try again.');
+                                'Failed', 'Failed to add review, try again.',
+                                backgroundColor: Colors.redAccent);
                           }
                         },
                         style: ElevatedButton.styleFrom(

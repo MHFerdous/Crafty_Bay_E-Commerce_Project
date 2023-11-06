@@ -103,15 +103,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       letterSpacing: 0.5),
                 ),
               ),
-              /* CustomStepper(
-                lowerLimit: 1,
-                upperLimit: 10,
-                stepValue: 1,
-                value: 1,
-                onChange: (newValue) {
-                  quantity = newValue;
-                },
-              )*/
             ],
           ),
           Row(
@@ -164,7 +155,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             "This product couldn't be added to wish list",
                             colorText: Colors.redAccent);
                       }
-                      if (result) {}
                     },
                     child: Card(
                       color: AppColors.primaryColor,

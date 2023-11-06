@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../state_holders/main_bottom_nav_controller.dart';
 import '../../state_holders/new_product_controller.dart';
-import '../../state_holders/profile_controller.dart';
 import '../../state_holders/special_product_controller.dart';
 import '../widgets/category_card.dart';
 import '../widgets/circular_icon_button.dart';
@@ -39,10 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.person_2_outlined,
               onTap: () {
-                //log(ProfileController().readProfileModel.data.toString());
-                print(ProfileController().readProfileModel.data?.cusName ??
-                    'maro mujhe maro');
-
                 Get.to(
                   () => const UpdateProfileScreen(),
                 );
