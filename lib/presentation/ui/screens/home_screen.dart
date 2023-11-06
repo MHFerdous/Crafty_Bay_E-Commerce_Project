@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:crafty_bay/presentation/state_holders/category_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/home_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holders/popular_product_controller.dart';
@@ -40,7 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
             CircularIconButton(
               icon: Icons.person_2_outlined,
               onTap: () {
-                log(ProfileController().readProfileModel.data.toString());
+                //log(ProfileController().readProfileModel.data.toString());
+                print(ProfileController().readProfileModel.data?.cusName ??
+                    'maro mujhe maro');
 
                 Get.to(
                   () => const UpdateProfileScreen(),

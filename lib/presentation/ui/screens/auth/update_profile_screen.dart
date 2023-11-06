@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -271,16 +273,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   _faxTEController.text.trim(),
                                 );
                                 if (result) {
+                                  log(ProfileController().readProfileModel.data.toString());
+                                  log(ProfileController().readProfileData.cusName.toString());
+
                                   Get.snackbar('Successful!',
-                                      'Profile has been created');
+                                      'Profile has been updated');
 
                                   Get.offAll(
                                     () => const MainBottomNavScreen(),
                                   );
                                 } else {
                                   Get.snackbar(
-                                      'Failed!', "Profile couldn't be created",
-                                      colorText: Colors.red);
+                                      'Failed!', "Profile couldn't be updated",
+                                      colorText: Colors.redAccent);
                                 }
                               }
                             },

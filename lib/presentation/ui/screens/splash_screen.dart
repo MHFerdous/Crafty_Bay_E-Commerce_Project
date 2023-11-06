@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
               : const EmailVerificationScreen(),
         );*/
 
-        if (AuthController.isLoggedIn == false) {
+        /* if (AuthController.isLoggedIn == false) {
           Get.offAll(
             () => const EmailVerificationScreen(),
           );
@@ -50,7 +50,10 @@ class _SplashScreenState extends State<SplashScreen> {
               () => const MainBottomNavScreen(),
             );
           }
-        }
+        }*/
+        Get.offAll(
+          () => const EmailVerificationScreen(),
+        );
       },
     );
   }

@@ -10,12 +10,12 @@ class ProfileController extends GetxController {
   String _message = '';
   CreateProfileData _completeProfileData = CreateProfileData();
   ReadProfileModel _readProfileModel = ReadProfileModel();
-  //ReadProfileData _readProfileData = ReadProfileData();
+  ReadProfileData _readProfileData = ReadProfileData();
 
   bool get profileInProgress => _profileInProgress;
   String get message => _message;
   CreateProfileData get completeProfileData => _completeProfileData;
-  //ReadProfileData get readProfileData => _readProfileData;
+  ReadProfileData get readProfileData => _readProfileData;
   ReadProfileModel get readProfileModel => _readProfileModel;
 
   Future<bool> createProfile(
@@ -70,8 +70,8 @@ class ProfileController extends GetxController {
     _profileInProgress = false;
     if (response.isSuccess) {
       _readProfileModel = ReadProfileModel.fromJson(response.responseJson!);
-      /* _readProfileData =
-          ReadProfileModel.fromJson(response.responseJson!).data!;*/
+       _readProfileData =
+          ReadProfileModel.fromJson(response.responseJson!).data!;
       update();
       return true;
     } else {
