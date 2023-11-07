@@ -64,6 +64,7 @@ class _CraftyBayState extends State<CraftyBay> {
       home: const SplashScreen(),
       initialBinding: StateHolderBinder(),
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch:
             MaterialColor(AppColors.primaryColor.value, AppColors().color),
         elevatedButtonTheme: ElevatedButtonThemeData(
