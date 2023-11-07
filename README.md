@@ -32,7 +32,7 @@ In today's fast-paced world, we don't always have time to go to physical stores 
 - Framework: Flutter
 - State Management: GetX
 - Backend: API
-- Architecture: MVC 
+- Architecture: MVP 
 
 ## Architecture
 
