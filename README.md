@@ -1,7 +1,8 @@
-
 # Crafty Bay
 
-Hi, I'm Md Mahmud Hossain Ferdous, and I want to share with you my latest project, an e-commerce app called 'Crafty Bay'. I used the Flutter framework to build it.
+Hi, I'm Md Mahmud Hossain Ferdous, and I want to share my project, an e-commerce app called 'Crafty Bay'. I used the Flutter framework to build it.
+
+
 
 
 ## Video
@@ -9,6 +10,7 @@ Hi, I'm Md Mahmud Hossain Ferdous, and I want to share with you my latest projec
 [Click here](https://drive.google.com/file/d/10Mpccv6FC6KfvUOQru_e27pj2jLvBSfA/view?usp=sharing)
 
 ## APK File 
+
 [Click here]()
 
 ## Flowchart
@@ -17,14 +19,14 @@ Hi, I'm Md Mahmud Hossain Ferdous, and I want to share with you my latest projec
 
 ## Goal 
 
-In today's fast-paced world, we don't always have time to go to physical stores to buy what we need. That's why I created this app, which allows users to browse available products, add items to their cart, and complete the purchase process all in one place. I also integrated a payment gateway, so that users can have a similar experience to other e-commerce apps on the market, even though it's not fully functional yet.
+In today's fast-paced world, we don't always have time to go to physical stores to buy what we need. That's why I created this app, which allows users to browse available products, add items to their cart, and complete the purchase process all in one place. I also integrated a payment gateway, so that users can have a similar experience to other e-commerce apps, even though it's not fully functional yet.
 ## Features
 
 - Light/dark mode toggle
 - Internet connection checking
 - Payment gateway
-- Checking user have profile or not
-- Cross platform
+- Checking whether the user has a profile or not
+- Cross-platform
 
 ## Tools
 - Framework: Flutter
